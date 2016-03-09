@@ -1,0 +1,69 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+  </head>
+  <body style="font-size:12px">
+    <p id="1"># Package and Distribute {: .doctitle}</p>
+    <p id="2">---</p>
+    <p id="3">[TOC]</p>
+    <p id="4">This document guides you how to package and distribute NW.js based app.</p>
+    <p id="5">## Quick Start</p>
+    <p id="6">You can use [`nw-builder`](https://github.com/nwjs/nw-builder) to quickly generate a package for you.</p>
+    <p id="7">1. [Prepare your app](#prepare-your-app) as below.</p>
+    <p id="8">2. Install `nw-builder` with `npm install -g nw-builder`</p>
+    <p id="9">3. Package your app with `nwbuild -p linux64 /path/to/your/app`</p>
+    <p id="10">Your app can be found in `./build` folder.</p>
+    <p id="11">## Prepare Your App</p>
+    <p id="12">Before packaging, you should prepare all necessary files on hands. Check out following checklist to make sure you didn't miss anything:</p>
+    <p id="13">* [ ] Source code and resources</p>
+    <p id="14">* [ ] Install NPM modules with `npm install`</p>
+    <p id="15">* [ ] [Rebuild native Node modules](Advanced/Use Native Node Modules.md)</p>
+    <p id="16">* [ ] [Build NaCl binaries](Advanced/Use NaCl in NW.js.md)</p>
+    <p id="17">* [ ] [Compile source code](Advanced/Protect JavaScript Source Code.md) and remove the original files</p>
+    <p id="18">* [ ] Icon used in [manifest file](../References/Manifest Format.md#icon)</p>
+    <p id="19">!!! warning</p>
+    <p id="20">    Do not assume your `node_modules` that target one platform work _as is_ in all platforms. For instance `node-email-templates` has specific Windows &amp; Mac OS X`npm install` commands. Besides, it requires python to install properly, which is not installed by default on Windows.</p>
+    <p id="21">    As a rule of thumb **`npm install` your `package.json` on each platform you target** to ensure everything works as expected.</p>
+    <p id="22">!!! note "Filename and Path"</p>
+    <p id="23">    On most Linux and some Mac OS X, the file system is **case sensitive**. That means `test.js` and `Test.js` are different files. Make sure the paths and filenames used in your app have the right case. Otherwise your app may look bad or crash on those file systems.</p>
+    <p id="24">!!! note "Long Path on Windows"</p>
+    <p id="25">    The length of path used in your app may exceed the maximum length (260 characters) on Windows. That will cause various build failures. This usually happens during installing dependencies with `npm install` using older version of NPM (&lt;3.0). Please build your app in the root directory, like `C:\build\`, to avoid this issue as much as possible.</p>
+    <p id="26">## Prepare NW.js</p>
+    <p id="27">You have to redistribute NW.js with your app to get your app running. NW.js provided multiple [build flavors](Advanced/Build Flavors.md) for different requirements and package size. Choose the proper build flavor for your product or [build it from source code](../For Developers/Building NW.js.md).</p>
+    <p id="28">All files in the downloaded package should be redistributed with your product, except `nwjc` or `nwjc.exe` in SDK flavor.</p>
+    <p id="29">## Package Your App</p>
+    <p id="30">There two options to pack your app: plain files or zip file.</p>
+    <p id="31">### Package Option 1. Plain Files (Recommended)</p>
+    <p id="32">On Windows and Linux, you can put the files of your app in the same folder of NW.js binaries and then ship them to your users. Make sure `nw` (or `nw.exe`) is in the same folder as `package.json`. Or you can put the files of your app in a folder named `package.nw` in the same folder as `nw` (or `nw.exe`).</p>
+    <p id="33">On Mac, put the files of your app into a folder named `app.nw` in `nwjs.app/Contents/Resources/` and done.</p>
+    <p id="34">It's the recommended way to pack your app.</p>
+    <p id="35">### Package Option 2. Zip File</p>
+    <p id="36">You can package all the files into a zip file and rename it as `package.nw`. And put it along with NW.js binaries for Windows and Linux. For Mac, put `package.nw` in `nwjs.app/Contents/Resources/`.</p>
+    <p id="37">!!! warning "Start Slow with Big Package or Too Many Files"</p>
+    <p id="38">    At starting time, NW.js will unzip the package into temp folder and load it from there. So it will start slower if your package is big or contains too many files.</p>
+    <p id="39">On Windows and Linux, you can even hide the zip file by appending the zip file to the end of `nw` or `nw.exe`.</p>
+    <p id="40">You can run following command on Windows to achieve this:</p>
+    <p id="41">```batch</p>
+    <p id="42">copy /b nw.exe+package.nw app.exe</p>
+    <p id="43">```</p>
+    <p id="44">or following command on Linux:</p>
+    <p id="45">```bash</p>
+    <p id="46">cat nw app.nw &gt; app &amp;&amp; chmod +x app </p>
+    <p id="47">```</p>
+    <p id="48">## Platform Specific Steps</p>
+    <p id="49">### Windows</p>
+    <p id="50">Icon for `nw.exe` can be replaced with tools like [Resource Hacker](http://www.angusj.com/resourcehacker/), [nw-builder](https://github.com/mllrsohn/node-webkit-builder) and [node-winresourcer](https://github.com/felicienfrancois/node-winresourcer).</p>
+    <p id="51">You can create a installer to deploy all necessary files onto end user's system. You can use [Windows Installer](https://msdn.microsoft.com/en-us/library/cc185688(VS.85).aspx), [NSIS](http://nsis.sourceforge.net/Main_Page) or [Inno Setup](http://www.jrsoftware.org/isinfo.php).</p>
+    <p id="52">### Linux</p>
+    <p id="53">On Linux, you need to create proper [`.desktop` file](https://wiki.archlinux.org/index.php/Desktop_Entries).</p>
+    <p id="54">To create a self-extractable installer script, you can use scripts like [`shar`](https://en.wikipedia.org/wiki/Shar) or [`makeself`](http://stephanepeter.com/makeself/).</p>
+    <p id="55">To distribute your app through the package management sysmtem, like `apt`, `yum`, `pacman` etc, please follow their official documents to create the packages.</p>
+    <p id="56">### Mac OS X</p>
+    <p id="57">On Mac OS X, you need to modify following files to have your own icon and boundle id:</p>
+    <p id="58">* `Contents/Resources/nw.icns`: icon of your app. `nw.icns` is in [Apple Icon Image Format](https://en.wikipedia.org/wiki/Apple_Icon_Image_format). You can convert your icon in PNG/JPEG format into ICNS by using tools like [Image2Icon](http://www.img2icnsapp.com/).</p>
+    <p id="59">* `Contents/Info.plist`: the apple package description file. You can view [Implementing Cocoa's Standard About Panel](http://cocoadevcentral.com/articles/000071.php) on how this file will influence your app and what fields you should modify.</p>
+    <p id="60">And you should sign you Mac app. Or the user won't launch the app if Gatekeeper is turned on. See [Signed Apps or Installer Packages](https://developer.apple.com/library/mac/documentation/IDEs/Conceptual/AppDistributionGuide/DistributingApplicationsOutside/DistributingApplicationsOutside.html) for details.</p>
+    <p id="61">## References</p>
+    <p id="62">See [wiki of NW.js](https://github.com/nwjs/nw.js/wiki/How-to-package-and-distribute-your-apps) for more tools of packaging your app.</p>
+  </body>
+</html>

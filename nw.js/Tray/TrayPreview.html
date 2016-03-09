@@ -1,0 +1,59 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+  </head>
+  <body style="font-size:12px">
+    <p id="1"># Tray {: doctitle}</p>
+    <p id="2">---</p>
+    <p id="3">[TOC]</p>
+    <p id="4">`Tray` is an abstraction of different controls on different platforms, usually it's a small icon shown on the OS's notification area. On Mac OS X it's called `Status Item`, on GTK it's `Status Icon`, and on Windows it's `System Tray Icon`.</p>
+    <p id="5">## Synopsis</p>
+    <p id="6">```javascript</p>
+    <p id="7">// Create a tray icon</p>
+    <p id="8">var tray = new nw.Tray({ title: 'Tray', icon: 'img/icon.png' });</p>
+    <p id="9">// Give it a menu</p>
+    <p id="10">var menu = new nw.Menu();</p>
+    <p id="11">menu.append(new nw.MenuItem({ type: 'checkbox', label: 'box1' }));</p>
+    <p id="12">tray.menu = menu;</p>
+    <p id="13">// Remove the tray</p>
+    <p id="14">tray.remove();</p>
+    <p id="15">tray = null;</p>
+    <p id="16">```</p>
+    <p id="17">## new Tray(option)</p>
+    <p id="18">* `option` `{Object}`</p>
+    <p id="19">    - `title` `{String}` title</p>
+    <p id="20">    - `tooltip` `{String}` tooltip</p>
+    <p id="21">    - `icon` `{String}` icon</p>
+    <p id="22">    - `alticon` `{String}` alternate</p>
+    <p id="23">    - `iconsAreTemplates` `{Boolean}` whether icons are templates</p>
+    <p id="24">    - `menu` `{Menu}` popup menu</p>
+    <p id="25">Create a new `Tray`, `option` is an object contains initial settings for the `Tray`. Every field has its own property in the `Tray`, see documentation of each property for details.</p>
+    <p id="26">## tray.title</p>
+    <p id="27">Get or set the `title` of the tray.</p>
+    <p id="28">On Mac OS X `title` will be showed on status bar along with its `icon`, but it doesn't have effects on GTK and Windows, since the latter two platforms only support tray to be showed as icons.</p>
+    <p id="29">## tray.tooltip</p>
+    <p id="30">Get or set the `tooltip` of the tray. `tooltip` shows when you hover the `Tray` with mouse.</p>
+    <p id="31">!!! note</p>
+    <p id="32">    `tooltip` is showed on all three platforms. Should be set as `Tray` property rather from `option` object constructor.</p>
+    <p id="33">## tray.icon</p>
+    <p id="34">Get or set the `icon` of the tray, `icon` must a path to your icon file. It can be a relative path which points to an icon in your app, or an absolute path pointing to a file in user's system.</p>
+    <p id="35">!!! note "Mac"</p>
+    <p id="36">    Mac OS X caveat: when used in notification context, png icon is not sized down like in windows notification area, it is rather displayed in 1:1 ratio.</p>
+    <p id="37">## tray.alticon (Mac)</p>
+    <p id="38">Get or set the alternate (active) tray icon.</p>
+    <p id="39">## tray.iconsAreTemplates (Mac)</p>
+    <p id="40">Get or set whether `icon` and `alticon` images are treated as "templates" (`true` by default). When the property is set to `true` the images are treated as "templates" and the system automatically ensures proper styling according to the various states of the status item (e.g. dark menu, light menu, etc.). Template images should consist only of black and clear colours and can use the alpha channel in the image to adjust the opacity of black content.</p>
+    <p id="41">## tray.menu</p>
+    <p id="42">Get or set the `menu` of the tray, `menu` will be showed when you click on the tray icon.</p>
+    <p id="43">On Mac OS X the menu will be showed when you click on the tray (which is the only action available for tray icons on Mac OS X). On Windows and Linux, the menu will be showed when you single click on the tray with right mouse button, clicking with left mouse button sends the `click` event and does not show a menu.</p>
+    <p id="44">In order to reduce differences from different platforms, setting `menu` property is the only way to bind a menu to tray, there's no way to popup a menu with left mouse button click on Linux and Windows.</p>
+    <p id="45">## tray.remove()</p>
+    <p id="46">Remove the tray.</p>
+    <p id="47">Once removed, you will not be able to show it again and you should set your tray variable to `null` to make it garbage collected. There is no way temporarily hide a tray icon.</p>
+    <p id="48">## Event: click</p>
+    <p id="49">Emitted when user clicks the menu item with left mouse button.</p>
+    <p id="50">You cannot catch click with right mouse button, because it is used to show menu. Even if you're not binding a menu to a tray, you still can not listen to it. Double click events are also ignored.</p>
+    <p id="51">!!! note "Mac"</p>
+    <p id="52">    NW.js does not support menulet (&lt;kbd&gt;&amp;#8984;&lt;/kbd&gt;+drag) since it will prohibit NW.js apps from being distributed in the App Store.</p>
+  </body>
+</html>

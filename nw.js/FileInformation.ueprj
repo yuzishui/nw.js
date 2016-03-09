@@ -1,0 +1,403 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ProjectManagement>
+  <ProjectInformation>
+    <Name>
+      <ProjectName>nw.js</ProjectName>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+      <ProjectSchedule>0%</ProjectSchedule>
+      <CreationTime>2016/3/9 20:39:20</CreationTime>
+      <EndTime>
+      </EndTime>
+      <RecentTime>2016/3/9 20:39:20</RecentTime>
+      <ProjectLocation>D:\workspace_github\nw.js\nw.js</ProjectLocation>
+      <FileInf>D:\workspace_github\nw.js\nw.js\FileInformation.ueprj</FileInf>
+      <Client>
+      </Client>
+      <Remarks>
+      </Remarks>
+    </Name>
+    <File>
+      <FileName>requirements.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\requirements.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\requirements\requirements.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\requirements\requirements.utx</UtxPath>
+      <OriginalCount>1</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+    <File>
+      <FileName>index.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\docs_cn\index.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\index\index.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\index\index.utx</UtxPath>
+      <OriginalCount>332</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+    <File>
+      <FileName>Building NW.js.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\docs_cn\For Developers\Building NW.js.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\Building NW.js\Building NW.js.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\Building NW.js\Building NW.js.utx</UtxPath>
+      <OriginalCount>744</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+    <File>
+      <FileName>Contributing to NW.js.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\docs_cn\For Developers\Contributing to NW.js.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\Contributing to NW.js\Contributing to NW.js.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\Contributing to NW.js\Contributing to NW.js.utx</UtxPath>
+      <OriginalCount>107</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+    <File>
+      <FileName>Contributors of Documents.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\docs_cn\For Developers\Contributors of Documents.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\Contributors of Documents\Contributors of Documents.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\Contributors of Documents\Contributors of Documents.utx</UtxPath>
+      <OriginalCount>15</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+    <File>
+      <FileName>Enable Proprietary Codecs.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\docs_cn\For Developers\Enable Proprietary Codecs.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\Enable Proprietary Codecs\Enable Proprietary Codecs.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\Enable Proprietary Codecs\Enable Proprietary Codecs.utx</UtxPath>
+      <OriginalCount>325</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+    <File>
+      <FileName>Repositories.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\docs_cn\For Developers\Repositories.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\Repositories\Repositories.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\Repositories\Repositories.utx</UtxPath>
+      <OriginalCount>21</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+    <File>
+      <FileName>Understanding Crash Dump.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\docs_cn\For Developers\Understanding Crash Dump.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\Understanding Crash Dump\Understanding Crash Dump.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\Understanding Crash Dump\Understanding Crash Dump.utx</UtxPath>
+      <OriginalCount>479</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+    <File>
+      <FileName>Writing Documents for NW.js.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\docs_cn\For Developers\Writing Documents for NW.js.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\Writing Documents for NW.js\Writing Documents for NW.js.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\Writing Documents for NW.js\Writing Documents for NW.js.utx</UtxPath>
+      <OriginalCount>537</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+    <File>
+      <FileName>Writing Test Cases for NW.js.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\docs_cn\For Developers\Writing Test Cases for NW.js.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\Writing Test Cases for NW.js\Writing Test Cases for NW.js.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\Writing Test Cases for NW.js\Writing Test Cases for NW.js.utx</UtxPath>
+      <OriginalCount>316</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+    <File>
+      <FileName>App.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\docs_cn\References\App.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\App\App.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\App\App.utx</UtxPath>
+      <OriginalCount>961</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+    <File>
+      <FileName>Changes to DOM.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\docs_cn\References\Changes to DOM.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\Changes to DOM\Changes to DOM.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\Changes to DOM\Changes to DOM.utx</UtxPath>
+      <OriginalCount>500</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+    <File>
+      <FileName>Changes to Node.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\docs_cn\References\Changes to Node.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\Changes to Node\Changes to Node.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\Changes to Node\Changes to Node.utx</UtxPath>
+      <OriginalCount>269</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+    <File>
+      <FileName>Clipboard.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\docs_cn\References\Clipboard.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\Clipboard\Clipboard.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\Clipboard\Clipboard.utx</UtxPath>
+      <OriginalCount>163</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+    <File>
+      <FileName>Command Line Options.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\docs_cn\References\Command Line Options.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\Command Line Options\Command Line Options.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\Command Line Options\Command Line Options.utx</UtxPath>
+      <OriginalCount>180</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+    <File>
+      <FileName>Manifest Format.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\docs_cn\References\Manifest Format.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\Manifest Format\Manifest Format.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\Manifest Format\Manifest Format.utx</UtxPath>
+      <OriginalCount>1598</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+    <File>
+      <FileName>Menu.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\docs_cn\References\Menu.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\Menu\Menu.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\Menu\Menu.utx</UtxPath>
+      <OriginalCount>563</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+    <File>
+      <FileName>MenuItem.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\docs_cn\References\MenuItem.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\MenuItem\MenuItem.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\MenuItem\MenuItem.utx</UtxPath>
+      <OriginalCount>930</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+    <File>
+      <FileName>Screen.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\docs_cn\References\Screen.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\Screen\Screen.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\Screen\Screen.utx</UtxPath>
+      <OriginalCount>930</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+    <File>
+      <FileName>Shell.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\docs_cn\References\Shell.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\Shell\Shell.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\Shell\Shell.utx</UtxPath>
+      <OriginalCount>127</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+    <File>
+      <FileName>Shortcut.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\docs_cn\References\Shortcut.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\Shortcut\Shortcut.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\Shortcut\Shortcut.utx</UtxPath>
+      <OriginalCount>564</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+    <File>
+      <FileName>Tray.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\docs_cn\References\Tray.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\Tray\Tray.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\Tray\Tray.utx</UtxPath>
+      <OriginalCount>641</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+    <File>
+      <FileName>webview Tag.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\docs_cn\References\webview Tag.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\webview Tag\webview Tag.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\webview Tag\webview Tag.utx</UtxPath>
+      <OriginalCount>220</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+    <File>
+      <FileName>Window.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\docs_cn\References\Window.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\Window\Window.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\Window\Window.utx</UtxPath>
+      <OriginalCount>3154</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+    <File>
+      <FileName>Debugging with DevTools.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\docs_cn\For Users\Debugging with DevTools.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\Debugging with DevTools\Debugging with DevTools.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\Debugging with DevTools\Debugging with DevTools.utx</UtxPath>
+      <OriginalCount>228</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+    <File>
+      <FileName>FAQ.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\docs_cn\For Users\FAQ.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\FAQ\FAQ.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\FAQ\FAQ.utx</UtxPath>
+      <OriginalCount>290</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+    <File>
+      <FileName>Getting Started.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\docs_cn\For Users\Getting Started.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\Getting Started\Getting Started.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\Getting Started\Getting Started.utx</UtxPath>
+      <OriginalCount>786</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+    <File>
+      <FileName>Package and Distribute.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\docs_cn\For Users\Package and Distribute.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\Package and Distribute\Package and Distribute.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\Package and Distribute\Package and Distribute.utx</UtxPath>
+      <OriginalCount>853</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+    <File>
+      <FileName>Build Flavors.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\docs_cn\For Users\Advanced\Build Flavors.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\Build Flavors\Build Flavors.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\Build Flavors\Build Flavors.utx</UtxPath>
+      <OriginalCount>89</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+    <File>
+      <FileName>Content Verification.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\docs_cn\For Users\Advanced\Content Verification.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\Content Verification\Content Verification.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\Content Verification\Content Verification.utx</UtxPath>
+      <OriginalCount>353</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+    <File>
+      <FileName>JavaScript Contexts in NW.js.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\docs_cn\For Users\Advanced\JavaScript Contexts in NW.js.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\JavaScript Contexts in NW.js\JavaScript Contexts in NW.js.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\JavaScript Contexts in NW.js\JavaScript Contexts in NW.js.utx</UtxPath>
+      <OriginalCount>1623</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+    <File>
+      <FileName>Protect JavaScript Source Code.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\docs_cn\For Users\Advanced\Protect JavaScript Source Code.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\Protect JavaScript Source Code\Protect JavaScript Source Code.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\Protect JavaScript Source Code\Protect JavaScript Source Code.utx</UtxPath>
+      <OriginalCount>226</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+    <File>
+      <FileName>Security in NW.js.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\docs_cn\For Users\Advanced\Security in NW.js.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\Security in NW.js\Security in NW.js.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\Security in NW.js\Security in NW.js.utx</UtxPath>
+      <OriginalCount>160</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+    <File>
+      <FileName>Test with ChromeDriver.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\docs_cn\For Users\Advanced\Test with ChromeDriver.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\Test with ChromeDriver\Test with ChromeDriver.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\Test with ChromeDriver\Test with ChromeDriver.utx</UtxPath>
+      <OriginalCount>318</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+    <File>
+      <FileName>Transparent Window.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\docs_cn\For Users\Advanced\Transparent Window.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\Transparent Window\Transparent Window.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\Transparent Window\Transparent Window.utx</UtxPath>
+      <OriginalCount>176</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+    <File>
+      <FileName>Use NaCl in NW.js.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\docs_cn\For Users\Advanced\Use NaCl in NW.js.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\Use NaCl in NW.js\Use NaCl in NW.js.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\Use NaCl in NW.js\Use NaCl in NW.js.utx</UtxPath>
+      <OriginalCount>1773</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+    <File>
+      <FileName>Use Native Node Modules.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\docs_cn\For Users\Advanced\Use Native Node Modules.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\Use Native Node Modules\Use Native Node Modules.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\Use Native Node Modules\Use Native Node Modules.utx</UtxPath>
+      <OriginalCount>243</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+    <File>
+      <FileName>From 0.12 to 0.13.txt</FileName>
+      <FilePath>D:\workspace_github\nw.js\docs_cn\For Users\Migration\From 0.12 to 0.13.txt</FilePath>
+      <SideFile>D:\workspace_github\nw.js\nw.js\From 0.12 to 0.13\From 0.12 to 0.13.txt</SideFile>
+      <UtxPath>D:\workspace_github\nw.js\nw.js\From 0.12 to 0.13\From 0.12 to 0.13.utx</UtxPath>
+      <OriginalCount>984</OriginalCount>
+      <Translatedcount>0</Translatedcount>
+      <SourceLanguage>英语</SourceLanguage>
+      <TargetLanguage>中文简体</TargetLanguage>
+    </File>
+  </ProjectInformation>
+  <MemoryManagement />
+  <TerminologyManagement />
+</ProjectManagement>

@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+  </head>
+  <body style="font-size:12px">
+    <p id="1"># Changes to Node {: .doctitle}</p>
+    <p id="2">---</p>
+    <p id="3">[TOC]</p>
+    <p id="4">## console</p>
+    <p id="5">Since NW.js supports GUI applications instead聽of console applications, the聽output of `console.log()` (and聽other similar methods such聽as `console.warn()` and `console.error()`) is redirected to the console of Chromium. You聽may see聽it in聽your "[Developer Tools](../For Users/Debugging with DevTools.md)" window (on聽its "Console" tab).</p>
+    <p id="6">## process</p>
+    <p id="7">A couple of new fields is聽added to聽the聽global `process` object:</p>
+    <p id="8">* `process.versions['nw']` is set with NW.js's version.</p>
+    <p id="9">* `process.versions['chromium']` is set with the chromium version which NW.js is based on.</p>
+    <p id="10">* `process.mainModule` is set for the start page (such聽as `index.html`) as聽specified in聽the聽manifest's [`main`](Manifest Format.md#main) field. However, when the [`node-main`](Manifest Format.md#node-main) field is聽also specified in聽the聽manifest, `process.mainModule` points to聽the聽file specified in聽the `node-main` field.</p>
+    <p id="11">## require</p>
+    <p id="12">Behaviour of relative paths in Node's `require()` method depends on the [JavaScript context](../For Users/Advanced/JavaScript Contexts in NW.js.md) in which the parent file is running in. (where "the聽parent file" is the聽file in聽which the `require()` method is聽called):</p>
+    <p id="13">* If the parent file is running in Node context, the聽child's relative聽path is聽treated as聽relative to聽its聽parent.</p>
+    <p id="14">* If the parent file is聽running in browser context, the聽child's relative聽path is聽treated as聽relative to聽the聽application's root聽directory, i.e. the directory of manifest file.</p>
+  </body>
+</html>

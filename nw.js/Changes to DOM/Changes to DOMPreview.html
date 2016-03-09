@@ -1,0 +1,76 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+  </head>
+  <body style="font-size:12px">
+    <p id="1"># Changes to DOM {: .doctitle}</p>
+    <p id="2">---</p>
+    <p id="3">[TOC]</p>
+    <p id="4">## &amp;lt;input type="file"&amp;gt;</p>
+    <p id="5">HTML5 does provided limited support for file dialogs with `&lt;input type="file" /&gt;` element, such as [`multiple`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-multiple), [`accept`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept) and `webkitdirectory`. NW.js extended the file input to better support native apps.</p>
+    <p id="6">!!! note</p>
+    <p id="7">    NW.js extended features are only enabled in Node frames for security reasons. See [Security in NW.js](../For Users/Advanced/Security in NW.js.md) for the differences of Node and normal frame.</p>
+    <p id="8">### fileinput.value</p>
+    <p id="9">The property contains native path of the local file.</p>
+    <p id="10">For example, you can read the file selected by user with Node.js API:</p>
+    <p id="11">```javascript</p>
+    <p id="12">// Get the native path of the file selected by user</p>
+    <p id="13">var fileinput = document.querySelector('input[type=file]');</p>
+    <p id="14">var path = fileinput.value;</p>
+    <p id="15">// Read file with Node.js API</p>
+    <p id="16">var fs = nw.require('fs');</p>
+    <p id="17">fs.readFile(path, 'utf8', function(err, txt) {</p>
+    <p id="18">  if (err) {</p>
+    <p id="19">    console.error(err);</p>
+    <p id="20">    return;</p>
+    <p id="21">  }</p>
+    <p id="22">  console.log(txt);</p>
+    <p id="23">});</p>
+    <p id="24">```</p>
+    <p id="25">### fileitem.path</p>
+    <p id="26">HTML5 provides a `files` attribute to return all files selected in a `&lt;input&gt;` tag. NW.js provided an extra property `fileitem.path` to each file item in `files`, which is the native path of the selected file.</p>
+    <p id="27">```javascript</p>
+    <p id="28">var fileinput = document.querySelector('input[type=file]');</p>
+    <p id="29">var files = fileinput.files;</p>
+    <p id="30">for (var i = 0; i &lt; files.length; ++i) {</p>
+    <p id="31">  console.log(files[i].path);</p>
+    <p id="32">}</p>
+    <p id="33">```</p>
+    <p id="34">### Attribute: `nwdirectory`</p>
+    <p id="35">`nwdirectory` is a bit similar to `webkitdirectory`, but it returns the path of directory instead of returning files in it.</p>
+    <p id="36">For example:</p>
+    <p id="37">```html</p>
+    <p id="38">&lt;input type="file" nwdirectory&gt;</p>
+    <p id="39">```</p>
+    <p id="40">### Attribute: `nwsaveas`</p>
+    <p id="41">`nwsaveas` will open a 'Save as' dialog, which lets user enter the path of a file. It's possible to select a non-existing file, which is different from the default file input tag.</p>
+    <p id="42">For example:</p>
+    <p id="43">```html</p>
+    <p id="44">&lt;input type="file" nwsaveas&gt;</p>
+    <p id="45">```</p>
+    <p id="46">And you can specify a value for the default file name to save:</p>
+    <p id="47">```html</p>
+    <p id="48">&lt;input type="file" nwsaveas="filename.txt"&gt;</p>
+    <p id="49">```</p>
+    <p id="50">### Attribute: `nwworkingdir`</p>
+    <p id="51">With `nwworkingdir`, the file dialog starts in聽the聽given directory when the element is聽activated.</p>
+    <p id="52">For example, following code enables the file dialog opening in `/home/path/` by default:</p>
+    <p id="53">```html</p>
+    <p id="54">&lt;input type="file" nwworkingdir="/home/path/"&gt;</p>
+    <p id="55">```</p>
+    <p id="56">## &amp;lt;iframe&amp;gt;</p>
+    <p id="57">NW.js extended `&lt;iframe&gt;` tag for easier developing native apps. Thoses features enables apps to bypass the restrictions of Sandbox and Same Origin Policy etc.</p>
+    <p id="58">See also [webview Tag](webview Tag.md) for the new `&lt;webview&gt;` tag.</p>
+    <p id="59">### Attribute: nwdisable</p>
+    <p id="60">Make the frame and subframes normal frames.</p>
+    <p id="61">!!! note</p>
+    <p id="62">    This attribute doesn't prevent the page in normal frames accessing its parent and top frames. Then they can still get access to Node.js APIs. So usually you may want to use this attribute with `nwfaketop` togather.</p>
+    <p id="63">### Attribute: nwfaketop</p>
+    <p id="64">Prevent web page in the frame accessing the real `window.parent` or `window.top`. They will get the faked parent and top, which is its own `window` object of the frame. Subframes will also be affected.</p>
+    <p id="65">This attribute is usually used with `nwdisable`.</p>
+    <p id="66">### Attribute: nwUserAgent</p>
+    <p id="67">Override the default user-agent when loading the web page in the frame and sub frames. See [`user-agent` in manifest](Manifest Format.md#user-agent) for details.</p>
+    <p id="68">## webview tag</p>
+    <p id="69">added some methods to [webview tag]((webview Tag.md)</p>
+  </body>
+</html>

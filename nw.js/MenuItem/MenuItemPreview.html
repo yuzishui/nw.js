@@ -1,0 +1,102 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+  </head>
+  <body style="font-size:12px">
+    <p id="1"># MenuItem {: .doctitle}</p>
+    <p id="2">---</p>
+    <p id="3">[TOC]</p>
+    <p id="4">`MenuItem` represents an item in a menu. A `MenuItem` can be a separator or a normal item which has label and icon or a checkbox. It can response to mouse click or keyboard shortcut.</p>
+    <p id="5">## Synopsis</p>
+    <p id="6">```javascript</p>
+    <p id="7">var item;</p>
+    <p id="8">// Create a separator</p>
+    <p id="9">item = new nw.MenuItem({ type: 'separator' });</p>
+    <p id="10">// Create a normal item with label and icon</p>
+    <p id="11">item = new nw.MenuItem({</p>
+    <p id="12">  type: "normal", </p>
+    <p id="13">  label: "I'm a menu item",</p>
+    <p id="14">  icon: "img/icon.png"</p>
+    <p id="15">});</p>
+    <p id="16">// Or you can omit the 'type' field for normal items</p>
+    <p id="17">item = new nw.MenuItem({ label: 'Simple item' });</p>
+    <p id="18">// Bind a callback to item</p>
+    <p id="19">item = new nw.MenuItem({</p>
+    <p id="20">  label: "Click me",</p>
+    <p id="21">  click: function() {</p>
+    <p id="22">    console.log("I'm clicked");</p>
+    <p id="23">  },</p>
+    <p id="24">  key: "s",</p>
+    <p id="25">  modifiers: "ctrl+alt",</p>
+    <p id="26">});</p>
+    <p id="27">// You can have submenu!</p>
+    <p id="28">var submenu = new nw.Menu();</p>
+    <p id="29">submenu.append(new nw.MenuItem({ label: 'Item 1' }));</p>
+    <p id="30">submenu.append(new nw.MenuItem({ label: 'Item 2' }));</p>
+    <p id="31">submenu.append(new nw.MenuItem({ label: 'Item 3' }));</p>
+    <p id="32">item.submenu = submenu;</p>
+    <p id="33">// And everything can be changed at runtime</p>
+    <p id="34">item.label = 'New label';</p>
+    <p id="35">item.click = function() { console.log('New click callback'); };</p>
+    <p id="36">```</p>
+    <p id="37">## new MenuItem(option)</p>
+    <p id="38">* `option` `{Object}` an object contains initial settings for the `MenuItem`</p>
+    <p id="39">    - `label` `{String}` _Optional_ label for normal item or checkbox</p>
+    <p id="40">    - `icon` `{String}` _Optional_ icon for normal item or checkbox</p>
+    <p id="41">    - `tooltip` `{String}` _Optional_ tooltip for normal item or checkbox</p>
+    <p id="42">    - `type` `{String}` _Optional_ the type of the item. Three types are accepted: `normal`, `checkbox`, `separator`</p>
+    <p id="43">    - `click` `{Function}` _Optional_ the callback function when item is triggered by mouse click or keyboard shortcut</p>
+    <p id="44">    - `enabled` `{Boolean}` _Optional_ whether the item is enabled or disabled. It's set to `true` by default.</p>
+    <p id="45">    - `checked` `{Boolean}` _Optional_ whether the checkbox is checked or not. It's set to `false` by default.</p>
+    <p id="46">    - `submenu` `{Menu}` _Optional_ a submenu</p>
+    <p id="47">    - `key` `{String}` _Optional_ the key of the shortcut</p>
+    <p id="48">    - `modifiers` `{String}` _Optional_ the modifiers of the shortcut</p>
+    <p id="49">Every field has its own property in the `MenuItem`, see documentation of each property for details.</p>
+    <p id="50">`MenuItem` is inherited from `EventEmitter`. You can use `on` to listen to the events.</p>
+    <p id="51">## item.type</p>
+    <p id="52">Get the `type` of a `MenuItem`, it can be `separator`, `checkbox` and `normal`.</p>
+    <p id="53">!!! note</p>
+    <p id="54">    The type can be set only when you create it. It cannot be changed at runtime.</p>
+    <p id="55">## item.label</p>
+    <p id="56">Get or set the `label` of a `MenuItem`, it can only be plain text for now.</p>
+    <p id="57">## item.icon</p>
+    <p id="58">Get or set the `icon` of a `MenuItem`, it must a path to your icon file. It can be a relative path which points to an icon in your app, or an absolute path pointing to a file in user's system.</p>
+    <p id="59">It has no effect on setting `icon` of a `separator` item.</p>
+    <p id="60">## item.iconIsTemplate (Mac)</p>
+    <p id="61">Get or set whether `icon` image is treated as "template" (`true` by default). When the property is set to `true` the image is treated as "template" and the system automatically ensures proper styling according to the various states of the status item (e.g. dark menu, light menu, etc.). Template images should consist only of black and clear colours and can use the alpha channel in the image to adjust the opacity of black content. It has no effects on Linux and Windows.</p>
+    <p id="62">## item.tooltip (Mac)</p>
+    <p id="63">Get or set the `tooltip` of a `MenuItem`, it can only be plain text. A `tooltip` is short string that describes the menu item, it will show when you hover your mouse on the item.</p>
+    <p id="64">## item.checked</p>
+    <p id="65">Get or set whether the `MenuItem` is `checked`. Usually if a `MenuItem` is checked. There will be a mark on the left side of it. It's used mostly to indicate whether an option is on.</p>
+    <p id="66">## item.enabled</p>
+    <p id="67">Get or set whether the `MenuItem` is `enabled`. An disabled `MenuItem` will be greyed out and you will not be able to click on it.</p>
+    <p id="68">## item.submenu</p>
+    <p id="69">Get or set the `submenu` of a `MenuItem`, the `submenu` must be a `Menu` object. You should set `submenu` in the `option` when creating the `MenuItem`. Changing it at runtime is slow on some platforms.</p>
+    <p id="70">## item.click</p>
+    <p id="71">Get or set the `click` callback of a `MenuItem`, the `click` must be a valid function. It will be called when users activate the item.</p>
+    <p id="72">## item.key</p>
+    <p id="73">A single character string to specify the shortcut key for the menu item.</p>
+    <p id="74">### Valid Keys for All Platfroms</p>
+    <p id="75">* Alphabet: `a`-`z`</p>
+    <p id="76">* Digits: `0`-`9`</p>
+    <p id="77">* Other keys on main area: `[` , `]` , `'` , `,` , `.` , `/` , `` ` `` , `-` , `=` , `\` , `'` , `;` , `Tab`</p>
+    <p id="78">* `Esc`</p>
+    <p id="79">* `Down` , `Up` , `Left` , `Right`</p>
+    <p id="80">* [W3C DOM Level 3 KeyboardEvent Key Values](http://www.w3.org/TR/DOM-Level-3-Events-key/): `KeyA` (same as `A`), `Escape` (same as `Esc`), `F1`, `ArrowDown` (same as `Down`) etc.</p>
+    <p id="81">### Special Keys for Mac Only</p>
+    <p id="82">On Mac, you can also use special keys as shortcut key with `String.fromCharCode(specialKey)`. Here are some useful keys:</p>
+    <p id="83">* **28**: Left (&lt;kbd&gt;&amp;larr;&lt;/kbd&gt;)</p>
+    <p id="84">* **29**: Right (&lt;kbd&gt;&amp;rarr;&lt;/kbd&gt;)</p>
+    <p id="85">* **30**: Up (&lt;kbd&gt;&amp;uarr;&lt;/kbd&gt;)</p>
+    <p id="86">* **31**: Down (&lt;kbd&gt;&amp;darr;&lt;/kbd&gt;)</p>
+    <p id="87">* **27**: Escape (&lt;kbd&gt;&amp;#9099;&lt;/kbd&gt;)</p>
+    <p id="88">* **11**: PageUp (&lt;kbd&gt;&amp;#8670;&lt;/kbd&gt;)</p>
+    <p id="89">* **12**: PageDown (&lt;kbd&gt;&amp;#8671;&lt;/kbd&gt;)</p>
+    <p id="90">For full list of special keys supported on Mac, see [NSMenuItem.keyEquivalent](https://developer.apple.com/library/mac/documentation/Cocoa/Reference/ApplicationKit/Classes/NSMenuItem_Class/#//apple_ref/occ/instp/NSMenuItem/keyEquivalent) and [NSEvent: Function-Key Unicodes](https://developer.apple.com/library/mac/documentation/Cocoa/Reference/ApplicationKit/Classes/NSEvent_Class/index.html#//apple_ref/doc/constant_group/Function_Key_Unicodes).</p>
+    <p id="91">## item.modifiers</p>
+    <p id="92">A string to specify the modifier keys for the shortcut of the menu item. It should be the concatenation of the following strings: `cmd` / `command` / `super`, `shift`, `ctrl`, `alt`. e.g. `"cmd+shift+alt"`.</p>
+    <p id="93">`cmd` represents different keys on all platforms: Windows key (&lt;kbd&gt;Windows&lt;/kbd&gt;) on Windows and Linux, Apple key (&lt;kbd&gt;&amp;#8984;&lt;/kbd&gt;) on Mac. `super` and `command` are aliases of `cmd`.</p>
+    <p id="94">## Event: click</p>
+    <p id="95">Emitted when user activates the menu item.</p>
+  </body>
+</html>

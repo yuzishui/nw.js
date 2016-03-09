@@ -1,0 +1,85 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+  </head>
+  <body style="font-size:12px">
+    <p id="1"># Menu {: .doctitle}</p>
+    <p id="2">---</p>
+    <p id="3">[TOC]</p>
+    <p id="4">`Menu` represents a menubar or a context menu. And `MenuItem` is item inside a menu. Please read the document of [`MenuItem`](MenuItem.md) for more details.</p>
+    <p id="5">## Synopsis</p>
+    <p id="6">An example to create a context menu:</p>
+    <p id="7">```javascript</p>
+    <p id="8">// Create an empty context menu</p>
+    <p id="9">var menu = new nw.Menu();</p>
+    <p id="10">// Add some items</p>
+    <p id="11">menu.append(new nw.MenuItem({ label: 'Item A' }));</p>
+    <p id="12">menu.append(new nw.MenuItem({ label: 'Item B' }));</p>
+    <p id="13">menu.append(new nw.MenuItem({ type: 'separator' }));</p>
+    <p id="14">menu.append(new nw.MenuItem({ label: 'Item C' }));</p>
+    <p id="15">// Remove one item</p>
+    <p id="16">menu.removeAt(1);</p>
+    <p id="17">// Popup as context menu</p>
+    <p id="18">menu.popup(10, 10);</p>
+    <p id="19">// Iterate menu's items</p>
+    <p id="20">for (var i = 0; i &lt; menu.items.length; ++i) {</p>
+    <p id="21">  console.log(menu.items[i]);</p>
+    <p id="22">}</p>
+    <p id="23">```</p>
+    <p id="24">To create a menubar, usually you have to create a 2-level menu and assign it to `window.menu`. Here is the example of creating a menubar:</p>
+    <p id="25">```javascript</p>
+    <p id="26">// Create an empty menubar</p>
+    <p id="27">var menu = new nw.Menu({type: 'menubar'});</p>
+    <p id="28">// Create a submenu as the 2nd level menu</p>
+    <p id="29">var submenu = new nw.Menu();</p>
+    <p id="30">submenu.append(new nw.MenuItem({ label: 'Item A' }));</p>
+    <p id="31">submenu.append(new nw.MenuItem({ label: 'Item B' }));</p>
+    <p id="32">// Create and append the 1st level menu to the menubar</p>
+    <p id="33">menu.append(new nw.MenuItem({</p>
+    <p id="34">  label: 'First Menu',</p>
+    <p id="35">  submenu: submenu</p>
+    <p id="36">}));</p>
+    <p id="37">// Assign it to `window.menu` to get the menu displayed</p>
+    <p id="38">nw.Window.get().menu = menu;</p>
+    <p id="39">```</p>
+    <p id="40">## new Menu([option])</p>
+    <p id="41">* `option` `{Object}` _Optional_</p>
+    <p id="42">    - `type` `{String}` _Optional_ two types are accepted by this method: "menubar" or "contextmenu". The value is set to "contextmenu" by default.</p>
+    <p id="43">Create a `Menu` object.</p>
+    <p id="44">## menu.items</p>
+    <p id="45">Get an array that contains all items of a menu. Each item is an instance of `MenuItem`. See [MenuItem](MenuItem.md) for detailed information.</p>
+    <p id="46">## menu.append(item)</p>
+    <p id="47">* `item` `{MenuItem}` the item to be appended to the tail of the menu</p>
+    <p id="48">Append `item` to the tail of the menu.</p>
+    <p id="49">## menu.insert(item, i)</p>
+    <p id="50">* `item` `{MenuItem}` the item to be inserted into the menu</p>
+    <p id="51">* `i` `{Integer}` the index in the menu list to insert the the item</p>
+    <p id="52">Insert the `item` at `i`th position of the menu. The index is started from 0.</p>
+    <p id="53">## menu.remove(item)</p>
+    <p id="54">* `item` `{MenuItem}` the item to be removed</p>
+    <p id="55">Remove `item` from the menu. This method requires you to keep the `MenuItem` outside the `Menu`.</p>
+    <p id="56">## menu.removeAt(i)</p>
+    <p id="57">* `i` `{Integer}` the index of the item to be removed from the menu</p>
+    <p id="58">Remove the `i`th item form the menu.</p>
+    <p id="59">## menu.popup(x, y)</p>
+    <p id="60">* `x` `{Integer}` the x position of the anchor</p>
+    <p id="61">* `y` `{Integer}` the y position of the anchor</p>
+    <p id="62">Popup the context menu at the anchor in (`x`, `y`) in current window. This method is only valid for `contextmenu` type.</p>
+    <p id="63">Usually you would listen to `contextmenu` event of DOM elements and manually popup the menu:</p>
+    <p id="64">```javascript</p>
+    <p id="65">document.body.addEventListener('contextmenu', function(ev) { </p>
+    <p id="66">  ev.preventDefault();</p>
+    <p id="67">  menu.popup(ev.x, ev.y);</p>
+    <p id="68">  return false;</p>
+    <p id="69">});</p>
+    <p id="70">```</p>
+    <p id="71">In this way, you can precisely choose which menu to show for different elements, and you can update menu elements just before popuping it.</p>
+    <p id="72">## menu.createMacBuiltin(appname, [options]) (Mac)</p>
+    <p id="73">* `appname` `{String}` The application name</p>
+    <p id="74">* `options` `{Object}` _Optional_</p>
+    <p id="75">    - `hideEdit` `{Boolean}` _Optional_ do not populate the Edit menu</p>
+    <p id="76">    - `hideWindow` `{Boolean}` _Optional_ do not populate the Window menu</p>
+    <p id="77">Creates the builtin menus (App, Edit and Window) within the menubar on Mac. The items can be manipulated with the `items` property. The argument `appname` is used for the title of App menu.</p>
+    <p id="78">You can still use builtin menus with other menu items. i.e. append or insert items to the menu is still valid.</p>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+  </head>
+  <body style="font-size:12px">
+    <p id="1"># Use Native Node Modules {: .doctitle}</p>
+    <p id="2">---</p>
+    <p id="3">[TOC]</p>
+    <p id="4">`npm` tool provided by Node.js builds the native modules, i.e. [C/C++ Addons](https://nodejs.org/api/addons.html), at the time of installation.</p>
+    <p id="5">Starting from 0.13.0, native modules built by node-gyp or npm in upstream can be supported.</p>
+    <p id="6">In Linux and OSX you can just load the native module directly. In windows you'll need to replace the file</p>
+    <p id="7">%APPDATA%\npm\node_modules\node-gyp\src\win_delay_load_hook.c with the one at https://github.com/nwjs/nw.js/blob/nw13/tools/win_delay_load_hook.c </p>
+    <p id="8">Before 0.13.0, the V8 version and Node ABI in NW.js is different from official Node.js. To use native Node.js modules with NW.js, you have to rebuild the modules with one of following tools.</p>
+    <p id="9">## nw-gyp</p>
+    <p id="10">[`nw-gyp`](https://github.com/nwjs/nw-gyp) is a hack on `node-gyp` to support NW.js specific headers and libraries. </p>
+    <p id="11">The usage is the same with `node-gyp`, except that you need to specify the version and arch (`x64` or `ia32`) of NW.js manually. </p>
+    <p id="12">````bash</p>
+    <p id="13">npm install -g nw-gyp</p>
+    <p id="14">cd myaddon</p>
+    <p id="15">nw-gyp rebuild --target=0.13.0 --arch=x64</p>
+    <p id="16">````</p>
+    <p id="17">See https://github.com/nwjs/nw-gyp for more details.</p>
+    <p id="18">## node-pre-gyp</p>
+    <p id="19">Some packages uses [node-pre-gyp](https://github.com/mapbox/node-pre-gyp), which supports building for both Node.js and NW.js by using either `node-gyp` or `nw-gyp`.</p>
+    <p id="20">The usage of `node-pre-gyp` is as following:</p>
+    <p id="21">````bash</p>
+    <p id="22">npm install -g node-pre-gyp</p>
+    <p id="23">cd myaddon</p>
+    <p id="24">node-pre-gyp build --runtime=node-webkit --target=0.13.0 --target_arch=x64</p>
+    <p id="25">````</p>
+    <p id="26">See https://github.com/mapbox/node-pre-gyp for more details.</p>
+    <p id="27">## Known Issues</p>
+    <p id="28">So far, you have to rebuild **each native module** with tools above including thoses are indirectly depended modules. Since `binding.gyp` is required for building native modules, you can easily locate all native modules by finding `binding.gyp` file.</p>
+  </body>
+</html>

@@ -1,0 +1,87 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+  </head>
+  <body style="font-size:12px">
+    <p id="1"># Building NW.js {: .doctitle}</p>
+    <p id="2">---</p>
+    <p id="3">[TOC]</p>
+    <p id="4">!!! important</p>
+    <p id="5">    This document is written for latest **NW 0.13**. For legacy build instructions, please read the [wiki page](https://github.com/nwjs/nw.js/wiki/Building-nw.js) on GitHub.</p>
+    <p id="6">## Prerequisites</p>
+    <p id="7">NW.js use same build tools and similar steps as Chromium. Read the instructions according to your platform to install `depot_tools` and other prerequistes:</p>
+    <p id="8">* [Windows](http://www.chromium.org/developers/how-tos/build-instructions-windows)</p>
+    <p id="9">* [Mac OS X](https://chromium.googlesource.com/chromium/src/+/master/docs/mac_build_instructions.md)</p>
+    <p id="10">* [Linux](https://chromium.googlesource.com/chromium/src/+/master/docs/linux_build_instructions.md)</p>
+    <p id="11">!!! note "Windows"</p>
+    <p id="12">    As suggested by Chromium document, you need to run `set DEPOT_TOOLS_WIN_TOOLCHAIN=0` or set the variable in your global environment.</p>
+    <p id="13">    CLang is the build tool used by non-Windows platforms. On Windows, it's not supported yet. You need to run `set GYP_DEFINES="clang=0"` to disable CLang on Windows before going to next steps.</p>
+    <p id="14">!!! note "Xcode 7"</p>
+    <p id="15">    Mac SDK 10.11 as part of Xcode 7 is not supported yet. If you have upgraded to Xcode 7, either downgrade to Xcode 6 or copy Mac SDK 10.10 from other machines under ```xcode-select -p`/Platforms/MacOSX.platform/Developer/SDKs`` as suggested by [Chromium document](https://chromium.googlesource.com/chromium/src/+/master/docs/mac_build_instructions.md).</p>
+    <p id="16">## Get the Code</p>
+    <p id="17">**Step 1.** Create a folder for holding NW.js source code, like `$HOME/nwjs`, and run following command in the folder to generate `.gclient` file:</p>
+    <p id="18">```bash</p>
+    <p id="19">mkdir -p $HOME/nwjs</p>
+    <p id="20">cd $HOME/nwjs</p>
+    <p id="21">gclient config --name=src https://github.com/nwjs/chromium.src.git@origin/nw13</p>
+    <p id="22">```</p>
+    <p id="23">Generally if you are not interested in running Chromium tests, you don't have to sync the test cases and reference builds, which saves you lot of time. Open the `.gclient` file you just created and replace `custom_deps` section with followings:</p>
+    <p id="24">```python</p>
+    <p id="25">"custom_deps" : {</p>
+    <p id="26">    "src/third_party/WebKit/LayoutTests": None,</p>
+    <p id="27">    "src/chrome_frame/tools/test/reference_build/chrome": None,</p>
+    <p id="28">    "src/chrome_frame/tools/test/reference_build/chrome_win": None,</p>
+    <p id="29">    "src/chrome/tools/test/reference_build/chrome": None,</p>
+    <p id="30">    "src/chrome/tools/test/reference_build/chrome_linux": None,</p>
+    <p id="31">    "src/chrome/tools/test/reference_build/chrome_mac": None,</p>
+    <p id="32">    "src/chrome/tools/test/reference_build/chrome_win": None,</p>
+    <p id="33">}</p>
+    <p id="34">```</p>
+    <p id="35">**Step 2.** Run following command in your terminal:</p>
+    <p id="36">```</p>
+    <p id="37">gclient sync --with_branch_heads</p>
+    <p id="38">```</p>
+    <p id="39">This usually downloads 20G+ from GitHub and Google's Git repos. Make sure you have a good network provider and be patient :stuck_out_tongue:</p>
+    <p id="40">When finished, you will see a `src` folder created in the same folder as `.gclient`.</p>
+    <p id="41">!!! note "First Build on Linux"</p>
+    <p id="42">    If you are building on Linux **for the first time**, you need to run `gclient sync --with_branch_heads --nohooks` and then run `./build/install-build-deps.sh` to install dependencies on Ubuntu. See [Chromium document](http://dev.chromium.org/developers/how-tos/get-the-code) for detailed instructions of getting the source code.</p>
+    <p id="43">!!! note "First Build on Windows"</p>
+    <p id="44">    On Windows, you have to install [DirectX SDK](https://www.microsoft.com/en-us/download/details.aspx?id=6812) and copy the files into the source folder manually using following bash command:</p>
+    <p id="45">```bash</p>
+    <p id="46">mkdir -p $HOME/nwjs/src/third_party/directxsdk/files</p>
+    <p id="47">cp -r /c/Program\ Files\ \(x86\)/Microsoft\ DirectX\ SDK\ \(June\ 2010\)/* \</p>
+    <p id="48">$HOME/nwjs/src/third_party/directxsdk/files/</p>
+    <p id="49">```</p>
+    <p id="50">## Build</p>
+    <p id="51">Build files are generated in `out/` folder during `gclient sync`. Run following command in your terminal will generate the Debug build of standard NW.js binaries in `out/Debug` folder:</p>
+    <p id="52">```bash</p>
+    <p id="53">cd src</p>
+    <p id="54">ninja -C out/Debug nwjs</p>
+    <p id="55">```</p>
+    <p id="56">!!! tip "Build Time"</p>
+    <p id="57">    Generally a full build takes hours of time depending on the performance of your machine. Recommended configuration is to build on a PC with multicore CPU (&gt;=8 cores), SSD and large memory (&gt;= 8G). And you can read [Build Faster](#build-faster) section below for some tips to speed up the build.</p>
+    <p id="58">To generate Release build, switch the second command to `ninja -C out/Release nwjs`.</p>
+    <p id="59">To build 32-bit/64-bit binaries or non-standard build flavors, you need to setup `GYP_DEFINES` variable in your environment and run `gclient runhooks --force` to generate build files. And then re-run the commands above to generate binaries. Continue to read following sections to find out how to setup `GYP_DEFINES`.</p>
+    <p id="60">### 32-bit/64-bit Build</p>
+    <p id="61">* Windows</p>
+    <p id="62">    - 32-bit: is the default build target</p>
+    <p id="63">    - 64-bit: `set GYP_DEFINES="target_arch=x64"` and rebuild in `out/Debug_x64` or `out/Release_x64` folder</p>
+    <p id="64">* Linux</p>
+    <p id="65">    - 32-bit: **TODO: chroot**</p>
+    <p id="66">    - 64-bit: is the default build target</p>
+    <p id="67">* Mac</p>
+    <p id="68">    - 32-bit: `export GYP_DEFINES="host_arch=ia32 target_arch=ia32"` and rebuild in `out/Debug` or `out/Release` folder</p>
+    <p id="69">    - 64-bit: is the default build target</p>
+    <p id="70">### Build Flavors</p>
+    <p id="71">* Standard: it's generated by default. Same as `GYP_DEFINES="nwjs_sdk=0 disable_nacl=1"`.</p>
+    <p id="72">* SDK: `GYP_DEFINES="nwjs_sdk=1 disable_nacl=0"`</p>
+    <p id="73">* NaCl: `GYP_DEFINES="disable_nacl=0"`</p>
+    <p id="74">See [Build Flavors](../For Users/Advanced/Build Flavors.md) for the differences of all supported build flavors.</p>
+    <p id="75">### Enable Proprietary Codecs</p>
+    <p id="76">Due to the license issue, the prebuilt binaries of NW.js doesn't support proprietary codecs, like H.264. So you can't play MP3/MP4 with `&lt;audio&gt;` and `&lt;video&gt;` tags with prebuilt NW.js. To enable those medias, you have to build NW.js from source code by following the document of [Enable Proprietary Codecs](Enable Proprietary Codecs.md).</p>
+    <p id="77">## Build Faster</p>
+    <p id="78">From Google's website, there are a few tips to speed up your build. Open the links below to see the tips for your platform:</p>
+    <p id="79">* [Mac Build Instructions: Faster builds](https://chromium.googlesource.com/chromium/src/+/master/docs/mac_build_instructions.md#Faster-builds)</p>
+    <p id="80">* [Tips for improving build speed on Linux](https://chromium.googlesource.com/chromium/src/+/master/docs/linux_faster_builds.md)</p>
+  </body>
+</html>

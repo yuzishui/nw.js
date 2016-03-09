@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+  </head>
+  <body style="font-size:12px">
+    <p id="1"># FAQ {: .doctitle}</p>
+    <p id="2">---</p>
+    <p id="3">[TOC]</p>
+    <p id="4">## console.log doesn't output to Linux terminal</p>
+    <p id="5">`--enable-logging=stderr` should be used in the command line</p>
+    <p id="6">## `var crypto = require('crypto')` gets a wrong object</p>
+    <p id="7">Chromium has its聽own global `crypto` object which can't be overwritten. So you can't use the same variable name `crypto`. Changing your variable name to something else, like `nodeCrypto`, will work.</p>
+    <p id="8">## Images are broken in AnugarJS and receive `Failed to load resource XXX net::ERR_UNKNOWN_URL_SCHEME` in DevTools</p>
+    <p id="9">AngularJS added `unsafe:` prefix for unknown scheme to prevent XSS attack. URLs in NW.js and Chrome apps are started with `chrome-extension:` scheme, which is unknown to AnuglarJS. The solution is to config the whitelist of known schemes with AngularJS by adding following lines:</p>
+    <p id="10">```javascript</p>
+    <p id="11">myApp.config(['$compileProvider',</p>
+    <p id="12">  function($compileProvider) {</p>
+    <p id="13">    $compileProvider.imgSrcSanitizationWhitelist(/^\s*((https?|ftp|file|blob|chrome-extension):|data:image\/)/);</p>
+    <p id="14">    $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|file:chrome-extension):/);</p>
+    <p id="15">  }]);</p>
+    <p id="16">```</p>
+    <p id="17">## Can't see exception reporting in AngularJS 2</p>
+    <p id="18">AngularJS 2 tries to register exception handlers in global variable `global`. However it's already existed in NW.js environment, which prevents exception reporting shown in DevTools. The workaround is to rename `global` to something else before loading any AngularJS libraries. For example,</p>
+    <p id="19">```html</p>
+    <p id="20">&lt;script&gt;</p>
+    <p id="21">window.nw_global = window.global;</p>
+    <p id="22">window.global = undefined;</p>
+    <p id="23">&lt;/script&gt;</p>
+    <p id="24">&lt;!-- Angular 2 Dependencies --&gt;</p>
+    <p id="25">```</p>
+    <p id="26">## How to leave fullscreen mode with ESC key?</p>
+    <p id="27">Usually users expect to use ESC key to quit fullscreen mode. By default, NW.js don't bind ESC shortcut for leaving fullscreen mode, but providing APIs for entering and leaving fullscreen mode. It will give developers more control on fullscreen mode.</p>
+    <p id="28">To enable ESC key for leaving fullscreen mode, you can use [Shortcut API](../References/Shortcut.md):</p>
+    <p id="29">```javascript</p>
+    <p id="30">nw.App.registerGlobalHotKey(new nw.Shortcut({</p>
+    <p id="31">  key: "Esc",</p>
+    <p id="32">  active: function () {</p>
+    <p id="33">    // decide whether to leave fullscreen mode</p>
+    <p id="34">    // then ...</p>
+    <p id="35">    nw.Window.get().leaveFullscreen();</p>
+    <p id="36">  })</p>
+    <p id="37">}));</p>
+    <p id="38">```</p>
+  </body>
+</html>

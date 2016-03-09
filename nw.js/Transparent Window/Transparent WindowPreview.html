@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+  </head>
+  <body style="font-size:12px">
+    <p id="1"># Transparent Window {: .doctitle}</p>
+    <p id="2">---</p>
+    <p id="3">[TOC]</p>
+    <p id="4">## Basic Requirements</p>
+    <p id="5">### Windows</p>
+    <p id="6">The transparent feature is only supported on Vista and above with DWM (Desktop Window Manager) enabled. Transparency might not work on classic theme / basic version of the OS, or using remote desktop.</p>
+    <p id="7">### Linux</p>
+    <p id="8">You need to run NW.js with these params and your window manager needs to support **compositing**:</p>
+    <p id="9">```params</p>
+    <p id="10">--enable-transparent-visuals --disable-gpu</p>
+    <p id="11">```</p>
+    <p id="12">## Make a Transparent Window</p>
+    <p id="13">In the HTML body, specify the alpha of the background colour:</p>
+    <p id="14">```html</p>
+    <p id="15">&lt;body style="background-color:rgba(0,0,0,0);"&gt;</p>
+    <p id="16">```</p>
+    <p id="17">and specify [`transparent` field](../../References/Manifest Format.md#transparent) to `true` in manifest:</p>
+    <p id="18">```json</p>
+    <p id="19">  "window": {</p>
+    <p id="20">    "transparent": true</p>
+    <p id="21">  }</p>
+    <p id="22">```</p>
+    <p id="23">## Click Through (Windows and Mac)</p>
+    <p id="24">You can enable transparency clickthrough on Windows and Mac. This feature enables you to click the object under the window **at the point whose alpha value is `0`**.</p>
+    <p id="25">To enable transparency clickthrough, you need following command line options:</p>
+    <p id="26">```params</p>
+    <p id="27">--disable-gpu --force-cpu-draw</p>
+    <p id="28">```</p>
+    <p id="29">!!! note</p>
+    <p id="30">    The click through is only supported for **frameless**, **non resizable** frame, though it might work for other configuration depending on the OS.</p>
+  </body>
+</html>

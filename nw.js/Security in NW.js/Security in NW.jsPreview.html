@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+  </head>
+  <body style="font-size:12px">
+    <p id="1"># Security in NW.js</p>
+    <p id="2">---</p>
+    <p id="3">[TOC]</p>
+    <p id="4">## Node and Normal Frames</p>
+    <p id="5">There are two kinds of frames in NW.js: node frame and normal frame.</p>
+    <p id="6">**Node frames** have following extra capabilities than **normal frames**:</p>
+    <p id="7">* Access Node.js / NW.js APIs</p>
+    <p id="8">* Access extended DOM features, such as [save as dialog](../../References/Changes to DOM.md#attribute-nwsaveas), [nwUserAgent attribute](../../References/Changes to DOM.md#attribute-nwuseragent) etc.</p>
+    <p id="9">* Bypass all security restrictions, such as sandboxing, same origin policy etc. For example, you can make cross origin XHR to any remote sites, or access to `&lt;iframe&gt;` element whose `src` points to remote sites in node frames.</p>
+    <p id="10">In NW.js, frames matching **ALL** of the following criterias will be a **node frame**:</p>
+    <p id="11">* `nodejs` set to `true` in [manifest file](../../References/Manifest Format.md#nodejs)</p>
+    <p id="12">* URL of windows and frames matching `node-remote` patterns in [manifest file](../../References/Manifest Format.md#node-remote) or `chrome-extension://` protocol.</p>
+    <p id="13">* Frames or parent frames **NOT** having [`nwdisable` attribute](../../References/Changes to DOM.md#attribute-nwdisable).</p>
+    <p id="14">* Frames or parent frames **NOT** in [`&lt;webview&gt;` tag](../../References/webview Tag.md)</p>
+  </body>
+</html>

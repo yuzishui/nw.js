@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+  </head>
+  <body style="font-size:12px">
+    <p id="1"># &amp;lt;webview&amp;gt; Tag</p>
+    <p id="2">---</p>
+    <p id="3">[TOC]</p>
+    <p id="4">Use the `&lt;webview&gt;` tag to embed 'guest' content (such as web pages) in your app. Different from the `&lt;iframe&gt;`, the `&lt;webview&gt;` runs in a separate process than your app; it doesn't have the same permissions as your app and all interactions between your app and embedded content will be asynchronous. This keeps your app safe from the embedded content.</p>
+    <p id="5">## Synopsis</p>
+    <p id="6">To embed a web page in your app, add the webview tag to your app's embedder page (this is the app page that will display the guest content). In its simplest form, the webview tag includes the src of the web page and css styles that control the appearance of the webview container:</p>
+    <p id="7">```html</p>
+    <p id="8">&lt;webview id="foo" src="http://www.google.com/" style="width:640px; height:480px"&gt;&lt;/webview&gt;</p>
+    <p id="9">```</p>
+    <p id="10">## References</p>
+    <p id="11">See [Chrome document of `&lt;webview&gt;` tag](https://developer.chrome.com/apps/tags/webview) for detailed API references.</p>
+    <p id="12">NW.js added the following methods besides upstream APIs:</p>
+    <p id="13">### webview.showDevTools(show, [container])</p>
+    <p id="14">* `show` `{boolean}` flag: open or close the devtools window</p>
+    <p id="15">* `container` `{webview Element}` _Optional_ the element of the `&lt;webview&gt;` to be used to display devtools. By default, the DevTools is shown with a new window.</p>
+    <p id="16">### loading local files in webview</p>
+    <p id="17">Add the following permission to the manifest:</p>
+    <p id="18">```json</p>
+    <p id="19">  "webview": {</p>
+    <p id="20">     "partitions": [</p>
+    <p id="21">        {</p>
+    <p id="22">          "name": "trusted",</p>
+    <p id="23">          "accessible_resources": [ "&lt;all_urls&gt;" ]</p>
+    <p id="24">        }</p>
+    <p id="25">     ]</p>
+    <p id="26">  }</p>
+    <p id="27">```</p>
+    <p id="28">and add 'partition="trusted"' attribute to the webview tag.</p>
+  </body>
+</html>

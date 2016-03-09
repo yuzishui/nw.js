@@ -1,0 +1,61 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+  </head>
+  <body style="font-size:12px">
+    <p id="1"># Writing Test Cases for NW.js {: .doctitle}</p>
+    <p id="2">---</p>
+    <p id="3">[TOC]</p>
+    <p id="4">## Test Framework</p>
+    <p id="5">NW.js is using a tiny Python based framework only in three files. You can read the source code in [`test` directory](https://github.com/nwjs/nw.js/tree/nw13/test).</p>
+    <p id="6">Each test case in NW.js is a runnable app, so that you can manually run the case without the framework.</p>
+    <p id="7">In NW.js, there are two types of test cases: `auto` and `remoting`. See [Write Test Cases](#write-test-cases) sections below to see the instructions.</p>
+    <p id="8">To run the test cases, use the following command:</p>
+    <p id="9">```bash</p>
+    <p id="10">python test/test.py -t 80 auto</p>
+    <p id="11">python test/test.py -t 80 remoting</p>
+    <p id="12">```</p>
+    <p id="13">## Write Test Cases</p>
+    <p id="14">### Auto Test Case</p>
+    <p id="15">**TODO**</p>
+    <p id="16">### Remoting Test Case</p>
+    <p id="17">The remoting test cases are driven by ChromeDriver. Usually these test cases involves user interaction. See [Test with ChromeDriver](../For Users/Advanced/Test with ChromeDriver.md) for the usage of ChromeDriver.</p>
+    <p id="18">A remoting test case requires a `test.py` file in the root of the application folder.</p>
+    <p id="19">Here is the template of `test.py` file:</p>
+    <p id="20">```python</p>
+    <p id="21">import time</p>
+    <p id="22">import os</p>
+    <p id="23">from selenium import webdriver</p>
+    <p id="24">from selenium.webdriver.chrome.options import Options</p>
+    <p id="25">chrome_options = Options()</p>
+    <p id="26">chrome_options.add_argument("nwapp=" + os.path.dirname(os.path.abspath(__file__)))</p>
+    <p id="27">driver = webdriver.Chrome(executable_path=os.environ['CHROMEDRIVER'], chrome_options=chrome_options)</p>
+    <p id="28">time.sleep(1)</p>
+    <p id="29">try:</p>
+    <p id="30">    print driver.current_url</p>
+    <p id="31">    # Put your test code here using `assert`</p>
+    <p id="32">finally:</p>
+    <p id="33">    driver.quit()</p>
+    <p id="34">```</p>
+    <p id="35">The real case is an NW.js app. With ChromeDriver, you can simulate mouse clicks and inputs and then get the content of some DOM element. For example, with following code, when you click the button of "Click Me", a new DOM element will be added to the document with content of "success":</p>
+    <p id="36">```html</p>
+    <p id="37">&lt;button id="clickme" onclick="success()"&gt;Click Me&lt;/button&gt;</p>
+    <p id="38">&lt;script&gt;</p>
+    <p id="39">function success() {</p>
+    <p id="40">    var el = document.createElement('div');</p>
+    <p id="41">    el.id = 'result';</p>
+    <p id="42">    el.innerHTML = 'success';</p>
+    <p id="43">    document.body.appendChild(el);</p>
+    <p id="44">}</p>
+    <p id="45">&lt;/script&gt;</p>
+    <p id="46">```</p>
+    <p id="47">Then you can test it in `test.py` script:</p>
+    <p id="48">```python</p>
+    <p id="49">driver.implicitly_wait(10) # 10s timeout when finding an element</p>
+    <p id="50">clickme = driver.find_element_by_id('clickme')</p>
+    <p id="51">clickme.click() # click the button</p>
+    <p id="52">result = driver.find_element_by_id('result')</p>
+    <p id="53">assert("success" in result.get_attribute('innerHTML')) # assert "success" is in the element</p>
+    <p id="54">```</p>
+  </body>
+</html>

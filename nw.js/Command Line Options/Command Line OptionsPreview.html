@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+  </head>
+  <body style="font-size:12px">
+    <p id="1"># Command Line Options {: .doctitle}</p>
+    <p id="2">---</p>
+    <p id="3">[TOC]</p>
+    <p id="4">You use following command line options when starting NW.js to change some default behaviors.</p>
+    <p id="5">## `--mixed-context`</p>
+    <p id="6">Run NW.js in [Mixed Context Mode](../For Users/Advanced/JavaScript Contexts in NW.js.md#mixed-context-mode) instead of Separate Context Mode.</p>
+    <p id="7">## `--nwapp`</p>
+    <p id="8">An alternative way to specify the path of the app. This parameter is especially useful when [testing with ChromeDriver](../For Users/Advanced/Test with ChromeDriver.md).</p>
+    <p id="9">## `--data-path`</p>
+    <p id="10">Specify the data directory for your app, which contains the stored data, caches and crash dumps etc. By default the data directory is in following directories according to your platform:</p>
+    <p id="11">* Windows: `%LOCALAPPDATA%/&lt;name-in-manifest&gt;/`</p>
+    <p id="12">* Mac: `~/Library/Application Support/&lt;name-in-manifest&gt;/`</p>
+    <p id="13">* Linux: `~/.config/&lt;name-in-manifest&gt;`</p>
+    <p id="14">Where `&lt;name-in-manifest&gt;` is the [`name` field in manifest](Manifest Format.md#name).</p>
+    <p id="15">## `--enable-gcm`</p>
+    <p id="16">Enable the chrome.gcm API.</p>
+    <p id="17">## `--enable-transparent-visuals`</p>
+    <p id="18">## `--disable-transparency`</p>
+    <p id="19">## `--disable-gpu`</p>
+    <p id="20">## `--force-cpu-draw`</p>
+    <p id="21">These options are related to the transparent window feature. See [Transparent Window](../For Users/Advanced/Transparent Window.md) for details.</p>
+    <p id="22">## Other Chromium Options</p>
+    <p id="23">You can also use Chromium options listed in https://github.com/nwjs/chromium.src/blob/nw13/chrome/common/chrome_switches.cc.</p>
+    <p id="24">These options can be put into [`chromium-args` in manifest](Manifest Format.md#chromium-args) to get NW.js running with them each time.</p>
+  </body>
+</html>

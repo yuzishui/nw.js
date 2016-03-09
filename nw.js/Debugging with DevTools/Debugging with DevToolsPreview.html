@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+  </head>
+  <body style="font-size:12px">
+    <p id="1"># Debugging with DevTools {: .doctitle}</p>
+    <p id="2">---</p>
+    <p id="3">!!! note "SDK Flavor Only"</p>
+    <p id="4">    DevTools is only available in [SDK flavor](Advanced/Build Flavors.md). It's recommended to use SDK flavor to develop and test your app. And use other flavors for production.</p>
+    <p id="5">## Open Developer Tools</p>
+    <p id="6">DevTools can be opened with keyboard shortcut &lt;kbd&gt;F12&lt;/kbd&gt; for Windows and Linux or &lt;kbd&gt;&amp;#8984;&lt;/kbd&gt;+&lt;kbd&gt;&amp;#8997;&lt;/kbd&gt;+&lt;kbd&gt;i&lt;/kbd&gt;.</p>
+    <p id="7">Alternatively, you聽may聽open DevTools programmatically using NW.js API [win.showDevTools()`](../References/Window.md##winshowdevtoolsiframe-headless-callback) for a window.</p>
+    <p id="8">## Remote Debugging</p>
+    <p id="9">You can use the `--remote-debugging-port=port` command line option to specify which port the DevTools should listen to. For example, by running `nw --remote-debugging-port=9222`, you can open http://localhost:9222/ in your browser to visit the debugger remotely.</p>
+    <p id="10">## Using devtools extensions</p>
+    <p id="11">Devtools extensions are fully supported, including the one for ReactJS etc. To use it, add the permission "chrome-extension://*" to manifest.json of the devtools extension, and load it with '--load-extension=path/to/extension' when nw is started. The files for devtools extensions can be copied from extension folder of Chrome browser after you install them from Chrome Web Store.</p>
+    <p id="12">### Sample</p>
+    <p id="13">https://s3-us-west-2.amazonaws.com/nwjs/sample/react-app.zip</p>
+    <p id="14">https://s3-us-west-2.amazonaws.com/nwjs/sample/react-devtools.zip</p>
+    <p id="15">Unpack them, download the SDK build and run it with: nw.exe --load-extension=path/to/devtools path/to/app/folder</p>
+    <p id="16">The app is a simple react app with 'package.json' added. The devtools files are from the Chrome browser's extension folder of official react devtools extension installed from Chrome Web store. Only the manifest file is modified to add the permission: "chrome-extension://*".</p>
+  </body>
+</html>

@@ -1,0 +1,130 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+  </head>
+  <body style="font-size:12px">
+    <p id="1"># App {: .doctitle}</p>
+    <p id="2">---</p>
+    <p id="3">[TOC]</p>
+    <p id="4">## App.argv</p>
+    <p id="5">Get the filtered command line arguments when starting the app. In NW.js, some command line arguments are used by NW.js, which should not be interested of your app. `App.argv` will filter out those arguments and return the ones left. You can get filtered patterns from `App.filteredArgv` and the full arguments from `App.fullArgv`.</p>
+    <p id="6">## App.fullArgv</p>
+    <p id="7">Get all the command line arguments when starting the app. The return values contains the arguments used by NW.js, such as `--nwapp`, `--remote-debugging-port` etc.</p>
+    <p id="8">## App.filteredArgv</p>
+    <p id="9">Get a list of patterns of filtered command line arguments used by `App.argv`. By default, following patterns are used to filter the arguments:</p>
+    <p id="10">```javascript</p>
+    <p id="11">[</p>
+    <p id="12">  /^--url=/,</p>
+    <p id="13">  /^--remote-debugging-port=/,</p>
+    <p id="14">  /^--renderer-cmd-prefix=/,</p>
+    <p id="15">  /^--nwapp=/</p>
+    <p id="16">]</p>
+    <p id="17">```</p>
+    <p id="18">## App.dataPath</p>
+    <p id="19">Get the application's data path in user's directory.</p>
+    <p id="20">* Windows: `%LOCALAPPDATA%/&lt;name&gt;`</p>
+    <p id="21">* Linux: `~/.config/&lt;name&gt;`</p>
+    <p id="22">* OSX: `~/Library/Application Support/&lt;name&gt;`</p>
+    <p id="23">`&lt;name&gt;` is the field in the manifest.</p>
+    <p id="24">## App.manifest</p>
+    <p id="25">Get the JSON object of the manifest file.</p>
+    <p id="26">## App.clearCache()</p>
+    <p id="27">Clear the HTTP cache in memory and the one on disk. This method call is synchronized.</p>
+    <p id="28">## App.closeAllWindows()</p>
+    <p id="29">Send the `close` event to all windows of current app, if no window is blocking the `close` event, then the app will quit after all windows have done shutdown. Use this method to quit an app will give windows a chance to save data.</p>
+    <p id="30">## App.crashBrowser()</p>
+    <p id="31">## App.crashRenderer()</p>
+    <p id="32">These 2 functions crashes the browser process and the renderer process respectively, to test the [Crash dump](../For Developers/Understanding Crash Dump.md) feature.</p>
+    <p id="33">## App.getProxyForURL(url)</p>
+    <p id="34">* `url` `{String}` the URL to query for proxy</p>
+    <p id="35">Query the proxy to be used for loading `url` in DOM. The return value is in the same format used in [PAC](http://en.wikipedia.org/wiki/Proxy_auto-config) (e.g. "DIRECT", "PROXY localhost:8080").</p>
+    <p id="36">## App.setProxyConfig(config)</p>
+    <p id="37">* `config` `{String}` Proxy rules</p>
+    <p id="38">Set the proxy config which the web engine will be used to request network resources.</p>
+    <p id="39">Rule (copied from [`net/proxy/proxy_config.h`](https://github.com/nwjs/chromium.src/blob/nw13/net/proxy/proxy_config.h))</p>
+    <p id="40">```</p>
+    <p id="41">    // Parses the rules from a string, indicating which proxies to use.</p>
+    <p id="42">    //</p>
+    <p id="43">    //   proxy-uri = [&lt;proxy-scheme&gt;"://"]&lt;proxy-host&gt;[":"&lt;proxy-port&gt;]</p>
+    <p id="44">    //</p>
+    <p id="45">    //   proxy-uri-list = &lt;proxy-uri&gt;[","&lt;proxy-uri-list&gt;]</p>
+    <p id="46">    //</p>
+    <p id="47">    //   url-scheme = "http" | "https" | "ftp" | "socks"</p>
+    <p id="48">    //</p>
+    <p id="49">    //   scheme-proxies = [&lt;url-scheme&gt;"="]&lt;proxy-uri-list&gt;</p>
+    <p id="50">    //</p>
+    <p id="51">    //   proxy-rules = scheme-proxies[";"&lt;scheme-proxies&gt;]</p>
+    <p id="52">    //</p>
+    <p id="53">    // Thus, the proxy-rules string should be a semicolon-separated list of</p>
+    <p id="54">    // ordered proxies that apply to a particular URL scheme. Unless specified,</p>
+    <p id="55">    // the proxy scheme for proxy-uris is assumed to be http.</p>
+    <p id="56">    //</p>
+    <p id="57">    // Some special cases:</p>
+    <p id="58">    //  * If the scheme is omitted from the first proxy list, that list applies</p>
+    <p id="59">    //    to all URL schemes and subsequent lists are ignored.</p>
+    <p id="60">    //  * If a scheme is omitted from any proxy list after a list where a scheme</p>
+    <p id="61">    //    has been provided, the list without a scheme is ignored.</p>
+    <p id="62">    //  * If the url-scheme is set to 'socks', that sets a fallback list that</p>
+    <p id="63">    //    to all otherwise unspecified url-schemes, however the default proxy-</p>
+    <p id="64">    //    scheme for proxy urls in the 'socks' list is understood to be</p>
+    <p id="65">    //    socks4:// if unspecified.</p>
+    <p id="66">    //</p>
+    <p id="67">    // For example:</p>
+    <p id="68">    //   "http=foopy:80;ftp=foopy2"  -- use HTTP proxy "foopy:80" for http://</p>
+    <p id="69">    //                                  URLs, and HTTP proxy "foopy2:80" for</p>
+    <p id="70">    //                                  ftp:// URLs.</p>
+    <p id="71">    //   "foopy:80"                  -- use HTTP proxy "foopy:80" for all URLs.</p>
+    <p id="72">    //   "foopy:80,bar,direct://"    -- use HTTP proxy "foopy:80" for all URLs,</p>
+    <p id="73">    //                                  failing over to "bar" if "foopy:80" is</p>
+    <p id="74">    //                                  unavailable, and after that using no</p>
+    <p id="75">    //                                  proxy.</p>
+    <p id="76">    //   "socks4://foopy"            -- use SOCKS v4 proxy "foopy:1080" for all</p>
+    <p id="77">    //                                  URLs.</p>
+    <p id="78">    //   "http=foop,socks5://bar.com -- use HTTP proxy "foopy" for http URLs,</p>
+    <p id="79">    //                                  and fail over to the SOCKS5 proxy</p>
+    <p id="80">    //                                  "bar.com" if "foop" is unavailable.</p>
+    <p id="81">    //   "http=foopy,direct://       -- use HTTP proxy "foopy" for http URLs,</p>
+    <p id="82">    //                                  and use no proxy if "foopy" is</p>
+    <p id="83">    //                                  unavailable.</p>
+    <p id="84">    //   "http=foopy;socks=foopy2   --  use HTTP proxy "foopy" for http URLs,</p>
+    <p id="85">    //                                  and use socks4://foopy2 for all other</p>
+    <p id="86">    //                                  URLs.</p>
+    <p id="87">```</p>
+    <p id="88">## App.quit()</p>
+    <p id="89">Quit current app. This method will **not** send `close` event to windows and app will just quit quietly.</p>
+    <p id="90">## App.setCrashDumpDir(dir)</p>
+    <p id="91">!!! warning "Deprecated"</p>
+    <p id="92">    This API was deprecated since 0.11.0.</p>
+    <p id="93">* `dir` `{String}` path to generate the crash dump</p>
+    <p id="94">Set the directory where the minidump file will be saved on crash. For more information, see [Crash dump](../For Developers/Understanding Crash Dump.md).</p>
+    <p id="95">## App.addOriginAccessWhitelistEntry(sourceOrigin, destinationProtocol, destinationHost, allowDestinationSubdomains)</p>
+    <p id="96">* `sourceOrigin` `{String}` The source origin. e.g. `http://github.com/`</p>
+    <p id="97">* `destinationProtocol` `{String}` The destination protocol where the `sourceOrigin` can access to. e.g. `app`</p>
+    <p id="98">* `destinationHost` `{String}` The destination host where the `sourceOrigin` can access to. e.g. `myapp`</p>
+    <p id="99">* `allowDestinationSubdomains` `{Boolean}` If set to true, the `sourceOrigin` is allowed to access subdomains of destinations.</p>
+    <p id="100">Add an entry to the whitelist used for controlling cross-origin access. Suppose you want to allow HTTP redirecting from `github.com` to the page of your app, use something like this:</p>
+    <p id="101">```javascript</p>
+    <p id="102">App.addOriginAccessWhitelistEntry('http://github.com/', 'chrome-extension', location.host, true);</p>
+    <p id="103">```</p>
+    <p id="104">Use `App.removeOriginAccessWhitelistEntry` with exactly the same arguments to do the contrary.</p>
+    <p id="105">## App.removeOriginAccessWhitelistEntry(sourceOrigin, destinationProtocol, destinationHost, allowDestinationSubdomains)</p>
+    <p id="106">* `sourceOrigin` `{String}` The source origin. e.g. `http://github.com/`</p>
+    <p id="107">* `destinationProtocol` `{String}` The destination protocol where the `sourceOrigin` can access to. e.g. `app`</p>
+    <p id="108">* `destinationHost` `{String}` The destination host where the `sourceOrigin` can access to. e.g. `myapp`</p>
+    <p id="109">* `allowDestinationSubdomains` `{Boolean}` If set to true, the `sourceOrigin` is allowed to access subdomains of destinations.</p>
+    <p id="110">Remove an entry from the whitelist used for controlling cross-origin access. See `addOriginAccessWhitelistEntry` above.</p>
+    <p id="111">## App.registerGlobalHotKey(shortcut)</p>
+    <p id="112">* `shortcut` `{Shortcut}` the `Shortcut` object to register.</p>
+    <p id="113">Register a global keyboard shortcut (also known as system-wide hot key) to the system.</p>
+    <p id="114">See [Shortcut](Shortcut.md) for more information.</p>
+    <p id="115">## App.unregisterGlobalHotKey(shortcut)</p>
+    <p id="116">* `shortcut` `{Shortcut}` the `Shortcut` object to unregister.</p>
+    <p id="117">Unregisters a global keyboard shortcut.</p>
+    <p id="118">See [Shortcut](Shortcut.md) for more information.</p>
+    <p id="119">## Event: open(args)</p>
+    <p id="120">* `args` `{String}` the full command line of the program.</p>
+    <p id="121">Emitted when users opened a file with your app.</p>
+    <p id="122">## Event: reopen</p>
+    <p id="123">This is a Mac specific feature. This event is sent when the user clicks the dock icon for an already running application.</p>
+  </body>
+</html>

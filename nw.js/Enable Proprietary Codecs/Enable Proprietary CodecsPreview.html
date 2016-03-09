@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+  </head>
+  <body style="font-size:12px">
+    <p id="1"># Enable Proprietary Codecs</p>
+    <p id="2">---</p>
+    <p id="3">[TOC]</p>
+    <p id="4">## Supported Codecs in Prebuilt NW.js Binary</p>
+    <p id="5">As NW.js is based on Chromium, the media components are essentially the same.</p>
+    <p id="6">In the pre-built NW.js, following codecs are supported:</p>
+    <p id="7">```none</p>
+    <p id="8">theora,vorbis,vp8,pcm_u8,pcm_s16le,pcm_s24le,pcm_f32le,pcm_s16be,pcm_s24be</p>
+    <p id="9">```</p>
+    <p id="10">and following demuxers are supported:</p>
+    <p id="11">```none</p>
+    <p id="12">ogg,matroska,wav</p>
+    <p id="13">```</p>
+    <p id="14">## Enable Proprietary Codecs in NW.js</p>
+    <p id="15">!!! warning "License and Patent Fee"</p>
+    <p id="16">    MP3 and H.264 codecs are licensed under the GPL in `ffmpeg` used by NW.js. Make sure your app are released with compatible license of GPL. And you also have to pay patent licensing royalties for using them. Consult a lawyer if you do not understand the licensing constraints and using patented media formats in your application.</p>
+    <p id="17">In recent versions of Chromium project, ffmpeg DLL was changed to be builtin. And we don't have license to redistribute the codec in question. So developers don't have any ways to get the codec without compiling. To make things easier, we build ffmpeg as a separate Dll. The Dll we distribute will not contain any proprietary codecs in question. Developers can recompile the Dll for themselves, which is much easier than compiling NW. Or they can get Dll from someone else [from the community](https://github.com/nwjs/nw.js/issues/4492). Note that developers can redistribute binaries containing proprietary codecs as long as they have the license. If a developer doesn't have the license, using this tip or moving to other solutions doesn't make him/her eligible to redistribute the codecs.</p>
+    <p id="18">In order to use MP3 and H.264, you'll need to compile ffmpeg with patch and corresponding options.</p>
+    <p id="19">**Step 1.** Apply following patch to `third_party/ffmpeg/ffmpeg.gyp` to make `ffmpeg` include the codecs:</p>
+    <p id="20">```diff</p>
+    <p id="21">diff --git a/ffmpeg.gyp b/ffmpeg.gyp                   </p>
+    <p id="22">index 294dd2e..7dfcd3a 100755                          </p>
+    <p id="23">--- a/ffmpeg.gyp                                       </p>
+    <p id="24">+++ b/ffmpeg.gyp                                       </p>
+    <p id="25">@@ -72,7 +72,7 @@                                      </p>
+    <p id="26">       ['chromeos == 1', {                             </p>
+    <p id="27">         'ffmpeg_branding%': '&lt;(branding)OS',          </p>
+    <p id="28">       }, {  # otherwise, assume Chrome/Chromium.      </p>
+    <p id="29">-        'ffmpeg_branding%': '&lt;(branding)',            </p>
+    <p id="30">+        'ffmpeg_branding%': 'Chrome'                  </p>
+    <p id="31">       }],                                             </p>
+    <p id="32">     ],                                                </p>
+    <p id="33">```</p>
+    <p id="34">**Step 2.** Regenerate the gyp files again with `gclient runhooks`.</p>
+    <p id="35">**Step 3.** Rebuild ffmpeg Dll with `ninja -C out/Release ffmpeg`.</p>
+  </body>
+</html>

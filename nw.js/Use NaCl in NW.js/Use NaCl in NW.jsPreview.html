@@ -1,0 +1,119 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+  </head>
+  <body style="font-size:12px">
+    <p id="1"># Use NaCl in NW.js {: .doctitle}</p>
+    <p id="2">---</p>
+    <p id="3">[TOC]</p>
+    <p id="4">!!! note "Feature for SDK and NaCl Flavor"</p>
+    <p id="5">    This feature is only available in **SDK and NaCl flavor**. See [Build Flavors](Build Flavors.md) for details.</p>
+    <p id="6">NW.js supports NaCl (Native Client) and PNaCl (Portable Native Client) just as Chromium. You can embed NaCl and PNaCl within you app.</p>
+    <p id="7">!!! note</p>
+    <p id="8">    Following tutorial is copied from [Chrome document for NaCl](https://developer.chrome.com/native-client/devguide/tutorial/tutorial-part1).</p>
+    <p id="9">## Overview</p>
+    <p id="10">This tutorial shows how to build and run a web application using Portable Native Client (PNaCl). This is a client-side application that uses HTML, JavaScript and a Native Client module written in C++. The PNaCl toolchain is used to enable running the Native Client module directly from a web page.</p>
+    <p id="11">It鈥檚 recommended that you read the [Native Client Technical Overview](https://developer.chrome.com/native-client/overview.html) prior to going through this tutorial.</p>
+    <p id="12">### What the application in this tutorial does</p>
+    <p id="13">The application in this tutorial shows how to load a Native Client module in a web page, and how to send messages between JavaScript and the Native Client module. In this simple application, the JavaScript sends a `'hello'` message to the Native Client module. When the Native Client module receives a message, it checks whether the message is equal to the string `'hello'`. If it is, the Native Client module returns a message saying `'hello from NaCl'`. A JavaScript alert panel displays the message received from the Native Client module.</p>
+    <p id="14">### Communication between JavaScript and Native Client modules</p>
+    <p id="15">The Native Client programming model supports bidirectional communication between JavaScript and the Native Client module. Both sides can initiate and respond to messages. In all cases, the communication is asynchronous: The caller (JavaScript or the Native Client module) sends a message, but the caller does not wait for, or may not even expect, a response. This behavior is analogous to client/server communication on the web, where the client posts a message to the server and returns immediately. The Native Client messaging system is part of the Pepper API, and is described in detail in [Developer鈥檚 Guide: Messaging System](https://developer.chrome.com/native-client/devguide/coding/message-system.html). It is also similar to the way [web workers](http://en.wikipedia.org/wiki/Web_worker) interact with the main document in JavaScript.</p>
+    <p id="16">## Step 1: Download and install the Native Client SDK</p>
+    <p id="17">Follow the instructions on the [Download](https://developer.chrome.com/native-client/sdk/download.html) page to download and install the Native Client SDK.</p>
+    <p id="18">## Step 2: Start a local server</p>
+    <p id="19">To simulate a production environment, the SDK provides a simple web server that can be used to serve the application on `localhost`. A convenience Makefile rule called `serve` is the easiest way to invoke it:</p>
+    <p id="20">```bash</p>
+    <p id="21">$ cd pepper_$(VERSION)/getting_started</p>
+    <p id="22">$ make serve</p>
+    <p id="23">```</p>
+    <p id="24">!!! tip</p>
+    <p id="25">    The SDK may consist of several 鈥渂undles鈥? one per Chrome/Pepper version (see [versioning](https://developer.chrome.com/native-client/version.html) information). In the sample invocation above `pepper_$(VERSION)` refers to the specific version you want to use. For example, `pepper_37`. If you don鈥檛 know which version you need, use the one labeled (`stable`) by the `naclsdk list` command. See [Download the Native Client SDK](https://developer.chrome.com/native-client/sdk/download.html) for more details.</p>
+    <p id="26">If no port number is specified, the server defaults to port 5103, and can be accessed at http://localhost:5103.</p>
+    <p id="27">Any server can be used for the purpose of development. The one provided with the SDK is just a convenience, not a requirement.</p>
+    <p id="28">## Step 3: Set up the Chrome browser</p>
+    <p id="29">PNaCl is enabled by default in Chrome. We recommend that you use a version of Chrome that鈥檚 the same or newer than the SDK bundle used to build Native Client modules. Older PNaCl modules will always work with newer versions of Chrome, but the converse is not true.</p>
+    <p id="30">!!! tip</p>
+    <p id="31">    To find out the version of Chrome, type `about:chrome` in the address bar.</p>
+    <p id="32">For a better development experience, it鈥檚 also recommended to disable the Chrome cache. Chrome caches resources aggressively; disabling the cache helps make sure that the latest version of the Native Client module is loaded during development.</p>
+    <p id="33">* Open Chrome鈥檚 developer tools by clicking the menu icon ![menu-icon](https://developer.chrome.com/native-client/images/menu-icon.png) and choosing `Tools` &amp;gt; `Developer tools`.</p>
+    <p id="34">* Click the gear icon ![gear-icon](https://developer.chrome.com/native-client/images/gear-icon.png) in the bottom right corner of the Chrome window.</p>
+    <p id="35">* Under the 鈥淕eneral鈥?settings, check the box next to 鈥淒isable cache (while DevTools is open)鈥?</p>
+    <p id="36">* Keep the Developer Tools pane open while developing Native Client applications.</p>
+    <p id="37">## Step 4: Stub code for the tutorial</p>
+    <p id="38">The stub code for the tutorial is avalable in the SDK, in `pepper_$(VERSION)/getting_started/part1`. It contains the following files:</p>
+    <p id="39">* `index.html`: Contains the HTML layout of the page as well as the JavaScript code that interacts with the Native Client module.</p>
+    <p id="40">The Native Client module is included in the page with an `&lt;embed&gt;` tag that points to a manifest file.</p>
+    <p id="41">* `hello_tutorial.nmf`: A manifest file that鈥檚 used to point the HTML to the Native Client module and optionally provide additional commands to the PNaCl translator that is part of the Chrome browser.</p>
+    <p id="42">* `hello_tutorial.cc`: C++ code for a simple Native Client module.</p>
+    <p id="43">* `Makefile`: Compilation commands to build the **pexe** (portable executable) from the C++ code in `hello_tutorial.cc`.</p>
+    <p id="44">It鈥檚 a good idea to take a look at these files now鈥攖hey contain a large amount of comments that help explain their structure and contents. For more details on the structure of a typical Native Client application, see [Application Structure](https://developer.chrome.com/native-client/devguide/coding/application-structure.html).</p>
+    <p id="45">The stub code is intentionally very minimal. The C++ code does not do anything except correctly initialize itself. The JavaScript code waits for the Native Client module to load and changes the status text on the web page accordingly.</p>
+    <p id="46">## Step 5: Compile the Native Client module and run the stub application</p>
+    <p id="47">To compile the Native Client module, run `make`:</p>
+    <p id="48">```bash</p>
+    <p id="49">$ cd pepper_$(VERSION)/getting_started/part1</p>
+    <p id="50">$ make</p>
+    <p id="51">```</p>
+    <p id="52">Since the sample is located within the SDK tree, the Makefile knows how to find the PNaCl toolchain automatically and use it to build the module. If you鈥檙e building applications outside the NaCl SDK tree, you should set the `$NACL_SDK_ROOT` environment variable. See [Building Native Client Modules](https://developer.chrome.com/native-client/devguide/devcycle/building.html) for more details.</p>
+    <p id="53">Assuming the local server was started according to the instructions in [Step 2](#step-2-start-a-local-server), you can now load the sample by pointing Chrome to http://localhost:5103/part1. Chrome should load the Native Client module successfully and the Status text should change from 鈥淟OADING...鈥?to 鈥淪UCCESS鈥? If you run into problems, check out the [Troubleshooting section](#troubleshooting) below.</p>
+    <p id="54">## Step 6: Modify the JavaScript code to send a message to the Native Client module</p>
+    <p id="55">In this step, you鈥檒l modify the web page (`index.html`) to send a message to the Native Client module after the page loads the module.</p>
+    <p id="56">Look for the JavaScript function `moduleDidLoad()`, and add new code to send a 鈥榟ello鈥?message to the module. The new function should look as follows:</p>
+    <p id="57">```javascript</p>
+    <p id="58">function moduleDidLoad() {</p>
+    <p id="59">  HelloTutorialModule = document.getElementById('hello_tutorial');</p>
+    <p id="60">  updateStatus('SUCCESS');</p>
+    <p id="61">  // Send a message to the Native Client module</p>
+    <p id="62">  HelloTutorialModule.postMessage('hello');</p>
+    <p id="63">}</p>
+    <p id="64">```</p>
+    <p id="65">## Step 7: Implement a message handler in the Native Client module</p>
+    <p id="66">In this step, you鈥檒l modify the Native Client module (`hello_tutorial.cc`) to respond to the message received from the JavaScript code in the application. Specifically, you鈥檒l:</p>
+    <p id="67">* Implement the `HandleMessage()` member function of the module instance.</p>
+    <p id="68">* Use the `PostMessage()` member function to send a message from the module to the JavaScript code.</p>
+    <p id="69">First, add code to define the variables used by the Native Client module (the 鈥榟ello鈥?string you鈥檙e expecting to receive from JavaScript and the reply string you want to return to JavaScript as a response). In the file `hello_tutorial.cc`, add this code after the #include statements:</p>
+    <p id="70">```c++</p>
+    <p id="71">namespace {</p>
+    <p id="72">// The expected string sent by the browser.</p>
+    <p id="73">const char* const kHelloString = "hello";</p>
+    <p id="74">// The string sent back to the browser upon receipt of a message</p>
+    <p id="75">// containing "hello".</p>
+    <p id="76">const char* const kReplyString = "hello from NaCl";</p>
+    <p id="77">} // namespace</p>
+    <p id="78">```</p>
+    <p id="79">Now, implement the `HandleMessage()` member function to check for `kHelloString` and return `kReplyString`. Look for the following line:</p>
+    <p id="80">```c++</p>
+    <p id="81">// TODO(sdk_user): 1. Make this function handle the incoming message.</p>
+    <p id="82">Populate the member function with code, as follows:</p>
+    <p id="83">virtual void HandleMessage(const pp::Var&amp; var_message) {</p>
+    <p id="84">  if (!var_message.is_string())</p>
+    <p id="85">    return;</p>
+    <p id="86">  std::string message = var_message.AsString();</p>
+    <p id="87">  pp::Var var_reply;</p>
+    <p id="88">  if (message == kHelloString) {</p>
+    <p id="89">    var_reply = pp::Var(kReplyString);</p>
+    <p id="90">    PostMessage(var_reply);</p>
+    <p id="91">  }</p>
+    <p id="92">}</p>
+    <p id="93">```</p>
+    <p id="94">See the Pepper API documentation for additional information about the [pp::Instance.HandleMessage](https://developer.chrome.com/native-client/pepper_stable/cpp/classpp_1_1_instance.html#a5dce8c8b36b1df7cfcc12e42397a35e8) and [pp::Instance.PostMessage](https://developer.chrome.com/native-client/pepper_stable/cpp/classpp_1_1_instance.html#a67e888a4e4e23effe7a09625e73ecae9) member functions.</p>
+    <p id="95">## Step 8: Compile the Native Client module and run the application again</p>
+    <p id="96">1. Compile the Native Client module by running the `make` command again.</p>
+    <p id="97">2. Start the SDK web server by running `make serve`.</p>
+    <p id="98">3. Re-run the application by reloading http://localhost:5103/part1 in Chrome.</p>
+    <p id="99">After Chrome loads the Native Client module, you should see the message sent from the module.</p>
+    <p id="100">## Troubleshooting</p>
+    <p id="101">If your application doesn鈥檛 run, see [Step 3](#step-3-set-up-the-chrome-browser) above to verify that you鈥檝e set up your environment correctly, including both the Chrome browser and the local server. Make sure that you鈥檙e running a correct version of Chrome, which is also greater or equal than the SDK bundle version you are using.</p>
+    <p id="102">Another useful debugging aid is the Chrome JavaScript console (available via the Tools menu in Chrome). Examine it for clues about what went wrong. For example, if there鈥檚 a message saying 鈥淣aCl module crashed鈥? there is a possibility that the Native Client module has a bug; [debugging](https://developer.chrome.com/native-client/devguide/devcycle/debugging.html) may be required.</p>
+    <p id="103">There鈥檚 more information about troubleshooting in the documentation:</p>
+    <p id="104">* [FAQ Troubleshooting](https://developer.chrome.com/native-client/faq.html#faq-troubleshooting).</p>
+    <p id="105">* The [Progress Events](https://developer.chrome.com/native-client/devguide/coding/progress-events.html) document contains some useful information about handling error events.</p>
+    <p id="106">## Next steps</p>
+    <p id="107">* See the [Application Structure](https://developer.chrome.com/native-client/devguide/coding/application-structure.html) section in the Developer鈥檚 Guide for information about how to structure a Native Client module.</p>
+    <p id="108">* Check the [C++ Reference](https://developer.chrome.com/native-client/pepper_stable/cpp) for details about how to use the Pepper APIs.</p>
+    <p id="109">* Browse through the source code of the SDK examples (in the examples directory) to learn additional techniques for writing Native Client applications and using the Pepper APIs.</p>
+    <p id="110">* See the [Building](https://developer.chrome.com/native-client/devguide/devcycle/building.html), [Running](https://developer.chrome.com/native-client/devguide/devcycle/running.html), and [Debugging pages](https://developer.chrome.com/native-client/devguide/devcycle/debugging.html) for information about how to build, run, and debug Native Client applications.</p>
+    <p id="111">* Check the [naclports](http://code.google.com/p/naclports/) project to see what libraries have been ported for use with Native Client. If you port an open-source library for your own use, we recommend adding it to naclports (see [How to check code into naclports](http://code.google.com/p/naclports/wiki/HowTo_Checkin)).</p>
+    <p id="112">_Content available under the [CC-By 3.0 license](http://creativecommons.org/licenses/by/3.0/)_</p>
+  </body>
+</html>

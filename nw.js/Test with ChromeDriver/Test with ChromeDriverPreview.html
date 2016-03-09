@@ -1,0 +1,57 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+  </head>
+  <body style="font-size:12px">
+    <p id="1"># Test with ChromeDriver {: .doctitle}</p>
+    <p id="2">---</p>
+    <p id="3">[TOC]</p>
+    <p id="4">From [ChromeDriver project home page](https://sites.google.com/a/chromium.org/chromedriver/):</p>
+    <p id="5">&gt; WebDriver is an open source tool for automated testing of webapps across many browsers. It provides capabilities for navigating to web pages, user input, JavaScript execution, and more.  ChromeDriver is a standalone server which implements WebDriver's wire protocol for Chromium. ChromeDriver is available for Chrome on Android and Chrome on Desktop (Mac, Linux, Windows and ChromeOS).</p>
+    <p id="6">NW.js provide a customized ChromeDriver for automated testing NW.js based apps. You can use it with tools like [selenium](http://docs.seleniumhq.org/).</p>
+    <p id="7">## Getting started</p>
+    <p id="8">The following workflow uses [selenium-python](http://selenium-python.readthedocs.org/) to drive the tests. You can use any language port for Selenium to work with `chromedriver`.</p>
+    <p id="9">### Installing</p>
+    <p id="10">* Download ChromeDriver from NW.js website</p>
+    <p id="11">* Extract the package and place `chromedriver` under the same dir that contains the NW.js binaries: `nw` for Linux, `nw.exe` for Windows, or `node-webkit.app` for Mac.</p>
+    <p id="12">* Install `selenium-python` in your project:</p>
+    <p id="13">```bash</p>
+    <p id="14">pip install selenium</p>
+    <p id="15">```</p>
+    <p id="16">### Running</p>
+    <p id="17">Suppose your app shows a form for searching from remote. The page basically something like this:</p>
+    <p id="18">```html</p>
+    <p id="19">&lt;form action="http://mysearch.com/search" method="GET"&gt;</p>
+    <p id="20">    &lt;input type="text" name="q"&gt;&lt;input type="submit" value="Submit"&gt;</p>
+    <p id="21">&lt;/form&gt;</p>
+    <p id="22">```</p>
+    <p id="23">Write a Python script to automatically fill in the search box and submit the form:</p>
+    <p id="24">```python</p>
+    <p id="25">import time</p>
+    <p id="26">from selenium import webdriver</p>
+    <p id="27">from selenium.webdriver.chrome.options import Options</p>
+    <p id="28">chrome_options = Options()</p>
+    <p id="29">chrome_options.add_argument("nwapp=/path/to/your/app")</p>
+    <p id="30">driver = webdriver.Chrome(executable_path='/path/to/nwjs/chromedriver', chrome_options=chrome_options)</p>
+    <p id="31">time.sleep(5) # Wait 5s to see the web page</p>
+    <p id="32">search_box = driver.find_element_by_name('q')</p>
+    <p id="33">search_box.send_keys('ChromeDriver')</p>
+    <p id="34">search_box.submit()</p>
+    <p id="35">time.sleep(5) # Wait 5s to see the search result</p>
+    <p id="36">driver.quit()</p>
+    <p id="37">```</p>
+    <p id="38">See http://selenium-python.readthedocs.org/ for detailed documents of `selenium-python`.</p>
+    <p id="39">## Modifications on the upstream chromedriver</p>
+    <p id="40">* chromedriver is modified to find NW executable in the same directory by default</p>
+    <p id="41">* An additional option `nwargs` is added if you want to pass non-switch argument to the command line:</p>
+    <p id="42">```python</p>
+    <p id="43">import time</p>
+    <p id="44">from selenium import webdriver</p>
+    <p id="45">from selenium.webdriver.chrome.options import Options</p>
+    <p id="46">chrome_options = Options()</p>
+    <p id="47">chrome_options.add_argument("nwapp=/path/to/your/app")</p>
+    <p id="48">chrome_options.add_experimental_option("nwargs", ["arg1", "arg2"])</p>
+    <p id="49">driver = webdriver.Chrome(executable_path='/path/to/nwjs/chromedriver', chrome_options=chrome_options)</p>
+    <p id="50">```</p>
+  </body>
+</html>

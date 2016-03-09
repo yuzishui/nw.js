@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+  </head>
+  <body style="font-size:12px">
+    <p id="1"># Shell {: .doctitle}</p>
+    <p id="2">---</p>
+    <p id="3">[TOC]</p>
+    <p id="4">`Shell` is a collection of APIs that do desktop related jobs.</p>
+    <p id="5">## Synopsis</p>
+    <p id="6">```javascript</p>
+    <p id="7">// Open URL with default browser.</p>
+    <p id="8">nw.Shell.openExternal('https://github.com/nwjs/nw.js');</p>
+    <p id="9">// Open a text file with default text editor.</p>
+    <p id="10">nw.Shell.openItem('test.txt');</p>
+    <p id="11">// Show a file in parent folder with file manager.</p>
+    <p id="12">nw.Shell.showItemInFolder('test.txt');</p>
+    <p id="13">```</p>
+    <p id="14">## Shell.openExternal(uri)</p>
+    <p id="15">* `uri` `{String}` A URL to open in system default manner.</p>
+    <p id="16">Open the given external URI in the desktop's default manner. For example, mailto: URLs in the default mail user agent.</p>
+    <p id="17">## Shell.openItem(file_path)</p>
+    <p id="18">* `file_path` `{String}` path to a local file</p>
+    <p id="19">Open the given `file_path` in the desktop's default manner.</p>
+    <p id="20">## Shell.showItemInFolder(file_path)</p>
+    <p id="21">* `file_path` `{String}` path to a local file</p>
+    <p id="22">Show the given `file_path` in the parent folder with file manager. If possible, select the file.</p>
+  </body>
+</html>

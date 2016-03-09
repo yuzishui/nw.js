@@ -1,0 +1,152 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+  </head>
+  <body style="font-size:12px">
+    <p id="1"># JavaScript Contexts in NW.js {: .doctitle}</p>
+    <p id="2">---</p>
+    <p id="3">[TOC]</p>
+    <p id="4">## Concept of JavaScript Context</p>
+    <p id="5">Scripts running in different windows live in different JavaScript contexts, i.e. each聽window has its聽own global object and its聽own set of global constructors (such as `Array` or `Object`).</p>
+    <p id="6">That's common practice among web聽browsers and it's a聽good聽thing because, for聽example:</p>
+    <p id="7">* when an object's prototype is replaced or augmented by some library (such聽as [Prototype](http://prototypejs.org/)) or聽a聽simpler script, the聽analogous objects in聽other聽windows are unaffected nevertheless;</p>
+    <p id="8">* when a聽programmer makes a聽mistake (such聽as [missing `new` before a聽poorly聽written constructor](http://ejohn.org/blog/simple-class-instantiation/)) and聽the聽bug affects (pollutes) the聽global scope, it聽still cannot affect larger areas (several windows);</p>
+    <p id="9">* malicious applications cannot access confidential data structures in聽other聽windows.</p>
+    <p id="10">When a script accessing to an object / function defined in another context, JS engine will temporarily enter the target context and leave it once finished. </p>
+    <p id="11">## Separate Context Mode</p>
+    <p id="12">Besides the contexts created by browsers, NW.js introduced additional Node context for running Node modules by default. So NW.js has two types of JavaScript contexts: **Browser Context** and **Node Context**.</p>
+    <p id="13">!!! note "Web Worker"</p>
+    <p id="14">    Actually Web Workers are running in a separate JavaScript context which is neither browser context nor node context. But you can't access Web or Node.js or NW.js APIs in Web Worker's context.</p>
+    <p id="15">### Browser Context</p>
+    <p id="16">#### Load Script in Browser Context</p>
+    <p id="17">Scripts loaded or embedded by traditional web ways, such as using `&lt;script&gt;` element or jQuery's [`$.getScript()`](http://api.jquery.com/jQuery.getScript/) or [RequireJS](http://requirejs.org/), are running in browser context.</p>
+    <p id="18">#### Global Objects in Browser Context</p>
+    <p id="19">In browser context, there are some global objects including [JS builtin objects](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects) (such as `Date` or `Error` or `TypedArray`) and [Web API](https://developer.mozilla.org/en-US/docs/Web/Reference/API) (such as DOM API).</p>
+    <p id="20">#### Create New Browser Context</p>
+    <p id="21">Different windows and frames have different contexts. So when you create a new frame or window, you will get a new browser context.</p>
+    <p id="22">#### Access Node.js and NW.js API in Browser Context</p>
+    <p id="23">Some objects of Node context are copied to Browser context so that scripts running in Browser context can access Node.js objects:</p>
+    <p id="24">* `nw` -- the object of all [NW.js APIs](../../References)</p>
+    <p id="25">* `global` -- the global object of Node Context; same as `nw.global`</p>
+    <p id="26">* `require` -- the `require()` function for loading Node.js modules; similar to `nw.require()`, but it also supports `require('nw.gui')` to load NW.js API module.</p>
+    <p id="27">* `process` -- the [process module](https://nodejs.org/api/globals.html#globals_process) of Node.js; same as `nw.process`</p>
+    <p id="28">* `Buffer` -- the [Buffer class](https://nodejs.org/api/globals.html#globals_class_buffer) of Node.js</p>
+    <p id="29">#### Relative Path Resolving of `require()` in Browser Context</p>
+    <p id="30">Relative paths in Browser context are resolved according to path of main HTML file (like all browsers do).</p>
+    <p id="31">### Node Context</p>
+    <p id="32">#### Load Script in Node Context</p>
+    <p id="33">Scripts loaded with following ways are running in Node context:</p>
+    <p id="34">* Scripts loaded by `require()` of Node.js API</p>
+    <p id="35">* Scripts loaded by [`node-main` in Manifest file](../../References/Manifest Format.md#node-main)</p>
+    <p id="36">#### Global Objects in Node Context</p>
+    <p id="37">Scripts running in聽the聽Node context can use [JS builtin objects]() like browser context. In addition, you can also use [global objects defined by Node.js](https://nodejs.org/api/globals.html), such as `__dirname`, `process`, `Buffer` etc.</p>
+    <p id="38">!!! note</p>
+    <p id="39">    Web APIs are not available in Node context. See [Access Browser and NW.js API in Node Context](#access-browser-and-nwjs-api-in-node-context) below to find out how to use them.</p>
+    <p id="40">#### Create New Node Context</p>
+    <p id="41">**All node modules shares a same Node context in separate context mode**. But you have several ways to create new Node contexts:</p>
+    <p id="42">* Set `new_instance` option to `true` when creating window with [`Window.open()`](../../References/Window.md#windowopenurl-options-callback)</p>
+    <p id="43">* Start NW.js with `--mixed-context` CLI option to turn NW.js into [Mixed Context mode](#mixed-context)</p>
+    <p id="44">#### Access Browser and NW.js API in Node Context</p>
+    <p id="45">In Node context, there are no browser side or NW.js APIs, such as `alert()` or `document.*` or `nw.Clipboard` etc. To access browser APIs, you have to pass the corresponding objects, such as `window` object, to functions in Node context.</p>
+    <p id="46">See following example for how to achive this.</p>
+    <p id="47">Following script are running in Node context (myscript.js):</p>
+    <p id="48">```javascript</p>
+    <p id="49">// `el` should be passed from browser context</p>
+    <p id="50">exports.setText = function(el) {</p>
+    <p id="51">    el.innerHTML = 'hello';</p>
+    <p id="52">};</p>
+    <p id="53">```</p>
+    <p id="54">In the browser side (index.html):</p>
+    <p id="55">```html</p>
+    <p id="56">&lt;div id="el"&gt;&lt;/div&gt;</p>
+    <p id="57">&lt;script&gt;</p>
+    <p id="58">var myscript = require('./myscript');</p>
+    <p id="59">// pass the `el` element to the Node function</p>
+    <p id="60">myscript.setText(document.getElementbyId('el'));</p>
+    <p id="61">// you will see "hello" in the element</p>
+    <p id="62">&lt;/script&gt;</p>
+    <p id="63">```</p>
+    <p id="64">!!! note "`window` in Node Context"</p>
+    <p id="65">    There is a `window` object in Node context pointing to the main window as set in `main` field of Manifest file.</p>
+    <p id="66">#### Relative Paths Resolving of `require()` in Node Context</p>
+    <p id="67">Relative paths in node modules are resolved according to path of that module (like Node.js always do).</p>
+    <p id="68">## Mixed Context Mode</p>
+    <p id="69">Mixed context is introduced in NW.js 0.13. When running NW.js with [`--mixed-context` CLI option](../../References/Command Line Options.md#mixedcontext), a new Node context is created at the time of each browser context creation and running in a same context as browser context, a.k.a. the Mixed context.</p>
+    <p id="70">### Load Script in Mixed Context Mode</p>
+    <p id="71">To enable Mixed context, add `--mixed-context` when starting NW.js or add it to [`chromium-args` in Manifest file](../../References/Manifest Format.md#chromium-args).</p>
+    <p id="72">Any scripts loaded using web ways or `require()` in Node.js are running in a same context.</p>
+    <p id="73">### Global Objects in Mixed Context</p>
+    <p id="74">In Mixed context, you can use all browser and NW.js API in Node modules, and vice versa.</p>
+    <p id="75">`package.json`</p>
+    <p id="76">```javascript</p>
+    <p id="77">{</p>
+    <p id="78">    "name": "test-context",</p>
+    <p id="79">    "main": "index.html",</p>
+    <p id="80">    "chromium-args": "--mixed-context"</p>
+    <p id="81">}</p>
+    <p id="82">```</p>
+    <p id="83">`myscript.js`</p>
+    <p id="84">```javascript</p>
+    <p id="85">exports.createDate = function() {</p>
+    <p id="86">    return new Date();</p>
+    <p id="87">};</p>
+    <p id="88">exports.showAlert = function() {</p>
+    <p id="89">    alert("I'm running in Node module!");</p>
+    <p id="90">};</p>
+    <p id="91">```</p>
+    <p id="92">Then following comparison will success in Mixed context:</p>
+    <p id="93">`index.html`</p>
+    <p id="94">```html</p>
+    <p id="95">&lt;script&gt;</p>
+    <p id="96">var myscript = require('./myscript');</p>
+    <p id="97">console.log(myscript.createDate() instanceof Date); // true</p>
+    <p id="98">myscript.showAlert(); // I'm running in Node module!</p>
+    <p id="99">&lt;/script&gt;</p>
+    <p id="100">```</p>
+    <p id="101">### Comparing with Separate Context</p>
+    <p id="102">The advantage of MultiContext mode is that you will not encounter many [type checking issue](#working-with-multiple-contexts) as below.</p>
+    <p id="103">The cons is that in Mixed context mode, you can't share variable easily as before. To share variables among contexts, you should put variables in a common context that can be accessed from the contexts you want to share with. Or you can use [`window.postMessage()` API](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) to send and receive messages between contexts.</p>
+    <p id="104">## Working with Multiple Contexts</p>
+    <p id="105">While differences of contexts are generally benefitial, sometimes they聽may constitute a聽problem in聽your (or聽some other person's)聽code, and聽a聽need for聽a聽workaround arises.</p>
+    <p id="106">For example, in different browser contexts, the global objects are not identical and some type checking tricks will fail with multiple contexts.</p>
+    <p id="107">```html</p>
+    <p id="108">&lt;iframe id="myframe" src="myframe.html"&gt;&lt;/iframe&gt;</p>
+    <p id="109">&lt;script&gt;</p>
+    <p id="110">// `window` is the global object of current browser context</p>
+    <p id="111">// `myframe.contentWindow` is the global object of the `&lt;iframe&gt;`'s browser context</p>
+    <p id="112">var currentContext = window;</p>
+    <p id="113">var iframeContext = document.getElementById('myframe').contentWindow;</p>
+    <p id="114">// `myfunc` is defined in current context</p>
+    <p id="115">function myfunc() {</p>
+    <p id="116">}</p>
+    <p id="117">console.log(currentContext.Date === iframeContext.Date); // false</p>
+    <p id="118">console.log(currentContext.Function === iframeContext.Function); // false</p>
+    <p id="119">console.log(myfunc instanceof currentContext.Function); // true</p>
+    <p id="120">console.log(myfunc instanceof iframeContext.Function); // false</p>
+    <p id="121">console.log(myfunc.constructor === currentContext.Function); // true</p>
+    <p id="122">console.log(myfunc.constructor === iframeContext.Function); // false</p>
+    <p id="123">&lt;/script&gt;</p>
+    <p id="124">```</p>
+    <p id="125">### Problem with `instanceOf`</p>
+    <p id="126">The most common cause for聽such problems is the聽behaviour of the `instanceof` operator in聽JavaScript. As聽you聽may [see聽in聽MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/instanceof), the聽operation `someValue instanceof someConstructor` tests whether an聽object has in聽its prototype chain the `prototype` property of the聽given constructor. However, if `someValue` is聽passed from a聽different JavaScript context, then it聽has its聽own line of ancestor objects, and the `someValue instanceof someConstructor` check fails inevitably.</p>
+    <p id="127">For example, a聽simple check `someValue instanceof Array` cannot determine if a聽variable's value is聽an聽array's if it's passed from聽another context (see [Determining with absolute accuracy whether or聽not a聽JavaScript object is an聽array](http://web.mit.edu/jwalden/www/isArray.html) for聽details).</p>
+    <p id="128">### Problem with `obj.constructor`</p>
+    <p id="129">The same problem arises when the `obj.constructor` property is checked directly (for聽example, when `someValue.constructor === Array` is used instead聽of `someValue instanceof Array`).</p>
+    <p id="130">### Problem of `obj.__proto__`</p>
+    <p id="131">The legacy `obj.__proto__` gives you access to the prototype of that object directly. Comparing it's constructor with global object or use `instanceof` as above will still lead to the wrong result.</p>
+    <p id="132">### Problems in 3rd-Party Library</p>
+    <p id="133">3rd-party libraries may use problematic ways of type checking listed above. That will cause misterious errors. Once it happens, it should be a bug of 3rd-party library. You are recommended to report a bug for the library or fix it your own.</p>
+    <p id="134">### Reliable Way of Type Checking Across Contexts</p>
+    <p id="135">A聽way to聽prevent context-related problems is to聽**avoid using `instanceof`** when a聽value may聽come from聽another JavaScript context.</p>
+    <p id="136">You聽may use [`Array.isArray`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray) method to聽check whether a聽value is聽an聽array, and聽that聽method works reliably across contexts.</p>
+    <p id="137">For testing if `someValue` is an object of other context dependent globals, like `Function` or `Date` etc., you may use following tricks to test the actual types:</p>
+    <p id="138">```javascript</p>
+    <p id="139">// test a function</p>
+    <p id="140">Object.prototype.toString.apply(someValue) === "[object Function]"</p>
+    <p id="141">// test a Date</p>
+    <p id="142">Object.prototype.toString.apply(someValue) === "[object Date]"</p>
+    <p id="143">```</p>
+    <p id="144">However, if such a聽convenient alternate method is聽not readily available, or聽when you聽face a聽problem in聽someone other's (not聽your聽own) code and聽patching聽that would聽need a聽hassle, then聽another workaround is聽necessary.</p>
+    <p id="145">Also you can use [`nwglobal`](https://github.com/Mithgol/nwglobal), which returns the global objects in Node context, to workaround the type checking in some cases.</p>
+  </body>
+</html>

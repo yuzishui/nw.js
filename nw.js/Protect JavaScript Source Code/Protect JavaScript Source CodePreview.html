@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+  </head>
+  <body style="font-size:12px">
+    <p id="1"># Protect JavaScript Source Code {: doctitle}</p>
+    <p id="2">---</p>
+    <p id="3">[TOC]</p>
+    <p id="4">The JavaScript source code of your application can be protected by compiling to native code and loaded by NW.js. You only have to distribute the compiled code with your app for production.</p>
+    <p id="5">### Compilation</p>
+    <p id="6">JS source code is compiled to native code with the tool `nwjc` , which is provided in the binary download.</p>
+    <p id="7">To use it:</p>
+    <p id="8">```bash</p>
+    <p id="9">nwjc source.js binary.bin</p>
+    <p id="10">```</p>
+    <p id="11">The `*.bin` file is needed to be distributed with your application. You can name it whatever you want.</p>
+    <p id="12">### Load the Compiled JavaScript</p>
+    <p id="13">```javascript</p>
+    <p id="14">nw.Window.get().evalNWBin(frame, 'binary.bin');</p>
+    <p id="15">```</p>
+    <p id="16">The arguments of the [win.evalNWBin()](../../References/Window.md#winevalnwbin) method are similar with the `Window.eval()` method, where the first parameter is the target iframe (`null` for main frame), and the 2nd parameter is the binary code file.</p>
+    <p id="17">!!! note</p>
+    <p id="18">    The compiled code is executed in [Browser Context](JavaScript Contexts in NW.js.md#browser-context). You can use any Web APIs (such as DOM) and [access NW.js API and Node API](JavaScript Contexts in NW.js.md#access-nodejs-and-nwjs-api-in-browser-context) like other scripts running in browser context.</p>
+    <p id="19">### Known Issues</p>
+    <p id="20">The compiled code runs **slower than normal JS**: ~30% performance according to v8bench. Other non-compiled JS source code will not be affected.</p>
+    <p id="21">The compiled code is **not cross-platform nor compatible between versions** of NW.js. So you'll need to run `nwjc` for each of the platforms when you package your application.</p>
+  </body>
+</html>
