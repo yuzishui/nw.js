@@ -43,7 +43,7 @@
       <SideFile>D:\workspace_github\nw.js\nw.js\Building NW.js\Building NW.js.txt</SideFile>
       <UtxPath>D:\workspace_github\nw.js\nw.js\Building NW.js\Building NW.js.utx</UtxPath>
       <OriginalCount>744</OriginalCount>
-      <Translatedcount>88</Translatedcount>
+      <Translatedcount>744</Translatedcount>
       <SourceLanguage>英语</SourceLanguage>
       <TargetLanguage>中文简体</TargetLanguage>
     </File>
@@ -53,7 +53,7 @@
       <SideFile>D:\workspace_github\nw.js\nw.js\Contributing to NW.js\Contributing to NW.js.txt</SideFile>
       <UtxPath>D:\workspace_github\nw.js\nw.js\Contributing to NW.js\Contributing to NW.js.utx</UtxPath>
       <OriginalCount>107</OriginalCount>
-      <Translatedcount>0</Translatedcount>
+      <Translatedcount>107</Translatedcount>
       <SourceLanguage>英语</SourceLanguage>
       <TargetLanguage>中文简体</TargetLanguage>
     </File>
@@ -63,7 +63,7 @@
       <SideFile>D:\workspace_github\nw.js\nw.js\Contributors of Documents\Contributors of Documents.txt</SideFile>
       <UtxPath>D:\workspace_github\nw.js\nw.js\Contributors of Documents\Contributors of Documents.utx</UtxPath>
       <OriginalCount>15</OriginalCount>
-      <Translatedcount>0</Translatedcount>
+      <Translatedcount>15</Translatedcount>
       <SourceLanguage>英语</SourceLanguage>
       <TargetLanguage>中文简体</TargetLanguage>
     </File>
@@ -73,7 +73,7 @@
       <SideFile>D:\workspace_github\nw.js\nw.js\Enable Proprietary Codecs\Enable Proprietary Codecs.txt</SideFile>
       <UtxPath>D:\workspace_github\nw.js\nw.js\Enable Proprietary Codecs\Enable Proprietary Codecs.utx</UtxPath>
       <OriginalCount>325</OriginalCount>
-      <Translatedcount>0</Translatedcount>
+      <Translatedcount>325</Translatedcount>
       <SourceLanguage>英语</SourceLanguage>
       <TargetLanguage>中文简体</TargetLanguage>
     </File>
@@ -83,7 +83,7 @@
       <SideFile>D:\workspace_github\nw.js\nw.js\Repositories\Repositories.txt</SideFile>
       <UtxPath>D:\workspace_github\nw.js\nw.js\Repositories\Repositories.utx</UtxPath>
       <OriginalCount>21</OriginalCount>
-      <Translatedcount>0</Translatedcount>
+      <Translatedcount>21</Translatedcount>
       <SourceLanguage>英语</SourceLanguage>
       <TargetLanguage>中文简体</TargetLanguage>
     </File>
@@ -263,7 +263,7 @@
       <SideFile>D:\workspace_github\nw.js\nw.js\Debugging with DevTools\Debugging with DevTools.txt</SideFile>
       <UtxPath>D:\workspace_github\nw.js\nw.js\Debugging with DevTools\Debugging with DevTools.utx</UtxPath>
       <OriginalCount>228</OriginalCount>
-      <Translatedcount>0</Translatedcount>
+      <Translatedcount>228</Translatedcount>
       <SourceLanguage>英语</SourceLanguage>
       <TargetLanguage>中文简体</TargetLanguage>
     </File>
@@ -293,7 +293,7 @@
       <SideFile>D:\workspace_github\nw.js\nw.js\Package and Distribute\Package and Distribute.txt</SideFile>
       <UtxPath>D:\workspace_github\nw.js\nw.js\Package and Distribute\Package and Distribute.utx</UtxPath>
       <OriginalCount>853</OriginalCount>
-      <Translatedcount>0</Translatedcount>
+      <Translatedcount>853</Translatedcount>
       <SourceLanguage>英语</SourceLanguage>
       <TargetLanguage>中文简体</TargetLanguage>
     </File>
@@ -411,9 +411,17 @@
   <TerminologyManagement>
     <TerminologyDatabase>
       <UseState>true</UseState>
-      <UpdateStatus>false</UpdateStatus>
+      <UpdateStatus>true</UpdateStatus>
       <TerminologyDatabaseName>nw.js术语库.uetb</TerminologyDatabaseName>
       <TerminologyDatabasePath>D:\workspace_github\nw.js\nw.js\术语库\nw.js术语库\nw.js术语库.uetb</TerminologyDatabasePath>
+      <Source>英语</Source>
+      <Target>中文简体</Target>
+    </TerminologyDatabase>
+    <TerminologyDatabase>
+      <UseState>true</UseState>
+      <UpdateStatus>false</UpdateStatus>
+      <TerminologyDatabaseName>不转换英文标点.uetb</TerminologyDatabaseName>
+      <TerminologyDatabasePath>D:\workspace_github\nw.js\nw.js\术语库\不转换英文标点\不转换英文标点.uetb</TerminologyDatabasePath>
       <Source>英语</Source>
       <Target>中文简体</Target>
     </TerminologyDatabase>
