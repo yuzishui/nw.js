@@ -23,7 +23,7 @@
       <SideFile>D:\workspace_github\nw.js\nw.js\requirements\requirements.txt</SideFile>
       <UtxPath>D:\workspace_github\nw.js\nw.js\requirements\requirements.utx</UtxPath>
       <OriginalCount>1</OriginalCount>
-      <Translatedcount>0</Translatedcount>
+      <Translatedcount>1</Translatedcount>
       <SourceLanguage>英语</SourceLanguage>
       <TargetLanguage>中文简体</TargetLanguage>
     </File>
@@ -33,7 +33,7 @@
       <SideFile>D:\workspace_github\nw.js\nw.js\index\index.txt</SideFile>
       <UtxPath>D:\workspace_github\nw.js\nw.js\index\index.utx</UtxPath>
       <OriginalCount>332</OriginalCount>
-      <Translatedcount>0</Translatedcount>
+      <Translatedcount>332</Translatedcount>
       <SourceLanguage>英语</SourceLanguage>
       <TargetLanguage>中文简体</TargetLanguage>
     </File>
@@ -43,7 +43,7 @@
       <SideFile>D:\workspace_github\nw.js\nw.js\Building NW.js\Building NW.js.txt</SideFile>
       <UtxPath>D:\workspace_github\nw.js\nw.js\Building NW.js\Building NW.js.utx</UtxPath>
       <OriginalCount>744</OriginalCount>
-      <Translatedcount>0</Translatedcount>
+      <Translatedcount>88</Translatedcount>
       <SourceLanguage>英语</SourceLanguage>
       <TargetLanguage>中文简体</TargetLanguage>
     </File>
@@ -283,7 +283,7 @@
       <SideFile>D:\workspace_github\nw.js\nw.js\Getting Started\Getting Started.txt</SideFile>
       <UtxPath>D:\workspace_github\nw.js\nw.js\Getting Started\Getting Started.utx</UtxPath>
       <OriginalCount>786</OriginalCount>
-      <Translatedcount>0</Translatedcount>
+      <Translatedcount>786</Translatedcount>
       <SourceLanguage>英语</SourceLanguage>
       <TargetLanguage>中文简体</TargetLanguage>
     </File>
@@ -398,6 +398,24 @@
       <TargetLanguage>中文简体</TargetLanguage>
     </File>
   </ProjectInformation>
-  <MemoryManagement />
-  <TerminologyManagement />
+  <MemoryManagement>
+    <Memory>
+      <UseState>true</UseState>
+      <UpdateStatus>true</UpdateStatus>
+      <MemoryName>nw.js记忆库.uetm</MemoryName>
+      <MemoryPaths>D:\workspace_github\nw.js\nw.js\记忆库\nw.js记忆库\nw.js记忆库.uetm</MemoryPaths>
+      <Source>英语</Source>
+      <Target>中文简体</Target>
+    </Memory>
+  </MemoryManagement>
+  <TerminologyManagement>
+    <TerminologyDatabase>
+      <UseState>true</UseState>
+      <UpdateStatus>false</UpdateStatus>
+      <TerminologyDatabaseName>nw.js术语库.uetb</TerminologyDatabaseName>
+      <TerminologyDatabasePath>D:\workspace_github\nw.js\nw.js\术语库\nw.js术语库\nw.js术语库.uetb</TerminologyDatabasePath>
+      <Source>英语</Source>
+      <Target>中文简体</Target>
+    </TerminologyDatabase>
+  </TerminologyManagement>
 </ProjectManagement>
